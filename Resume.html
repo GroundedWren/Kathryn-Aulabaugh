@@ -42,7 +42,7 @@
 	<link rel="stylesheet" href="./styles/main.css" type="text/css">
 	<style>
 		#print {
-			padding: 5px;
+			padding: 15px;
 			box-shadow: 0px 0px 3px 0px black;
 			margin: 5px;
 			margin-left: auto;
@@ -51,7 +51,7 @@
 			max-width: 1100px;
 			height: auto;
 			
-			display: flex;
+			display: flex !important;
 			flex-direction: column;
 		}
 		#print.letter {
@@ -68,6 +68,8 @@
 			#print {
 				margin: 0px;
 				box-shadow: none;
+				width: auto !important;
+				height: auto !important;
 			}
 			footer {
 				display: none;
@@ -115,10 +117,11 @@
 		
 		main {
 			flex-grow: 1;
-			font-size: 0.9em;
+			font-size: 0.85em;
 			border-top: 1px solid;
 			display: flex;
 			flex-direction: column;
+			gap: 10px;
 			justify-content: space-around;
 		}
 		
@@ -138,6 +141,7 @@
 			justify-content: space-between;
 			background-color: #E3E3E3;
 			padding-right: 5px;
+			margin-bottom: 2px;
 		}
 		
 		.article-heading-left {
