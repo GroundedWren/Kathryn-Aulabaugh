@@ -50,12 +50,16 @@
 		}
 		
 		blockquote {
-			white-space: pre;
+			white-space: pre-wrap;
 		}
 		
 		figure {
 			width: fit-content;
 			margin: auto;
+		}
+		
+		img {
+			width: 100%;
 		}
 	</style>
 </head>
@@ -317,7 +321,7 @@
 			and television shows was used. The source for the dataset is here: <a href="http://ftp.sunet.se/mirror/archive/ftp.sunet.se/pub/tv+movies/imdb/">http://ftp.sunet.se/mirror/archive/ftp.sunet.se/pub/tv+movies/imdb/</a>. 
 			For the entity hierarchy, DBPedia’s ontology was
 			used (found at <a href="http://mappings.dbpedia.org/server/ontology/classes/">http://mappings.dbpedia.org/server/ontology/classes/</a>). It is also from DBPedia
-			that all gazetteer entries are sourced. This data can be found on <a href="https://harrier01.cs.illinois.edu/scratch/DatasetArchives/Archives-Semesters/2017M/2017M-ERSearch">https://harrier01.cs.illinois.edu/scratch/DatasetArchives/Archives-Semesters/2017M/2017M-ERSearch</a>.
+			that all gazetteer entries are sourced.
 		</p>
 		<p>
 			A central question to evaluating NER techniques was how they would perform with a
