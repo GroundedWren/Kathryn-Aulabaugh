@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Research report for Entity Search">
+	<title>Entity Search</title>
+
+	<script>
+		(function registerNs(ns) {
+		
+		}) (window.GW = {});
+		
+		window.addEventListener("load", function onLoad() {});
+		
+		window.addEventListener("beforeunload", function onBeforeUnload(event)
+		{
+		});
+	</script>
+	
+	<link rel="stylesheet" href="./styles/main.css" type="text/css">
+	<style>
+		header {
+			text-align: center;
+		}
+		header p {
+			margin: 0;
+		}
+		
+		nav {
+			width: fit-content;
+			margin: auto;
+			border: 1px solid;
+			padding: 5px;
+			margin-top: 5px;
+		}
+		
+		nav ol {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+		
+		main {
+			max-width: 1100px;
+			margin: auto;
+			margin-top: 5px;
+			margin-bottom: 5px;
+			padding: 5px;
+			box-shadow: 0px 0px 3px 0px black
+		}
+		
+		blockquote {
+			white-space: pre;
+		}
+		
+		figure {
+			width: fit-content;
+			margin: auto;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<h1>Entity Search Summer 2017 Research Report</h1>
+		<p>
+			Kathryn Aulabaugh<br />
+			Written <time datetime="2017-08-25T05:00:00.000Z">Aug 25, 2017</time>; Transcribed <time datetime="2024-02-04T21:29:35.486Z">Feb 4, 2024</time>
+		</p>
+	</header>
+	<nav>
+		<h2>Contents</h2>
+		<ol>
+			<li>
+				<a href="#TheProblem">The Problem</a>
+				<ol>
+					<li><a href="#NamedEntityRecognition">Named Entity Recognition</a></li>
+					<li><a href="#IndexDesign1">Index Design</a></li>
+				</ol>
+			</li>
+			<li>
+				<a href="#MyApproaches">My Approaches</a>
+				<ol>
+					<li><a href="#NamedEntityRecognitionSystemDesign">Named Entity Recognition System Design</a></li>
+					<li><a href="#IndexDesign2">Index Design</a></li>
+					<li><a href="#NamedEntityRecognitionTechniqueEvaluation">Named Entity Recognition Technique Evaluation</a></li>
+				</ol>
+			</li>
+			<li>
+				<a href="#Results">Results</a>
+				<ol>
+					<li><a href="#StanfordConditionalRandomFieldNERClassifiers">Stanford Conditional Random Field NER Classifiers</a></li>
+				</ol>
+			</li>
+			<li><a href="#Assessment">Assessment</a></li>
+			<li><a href="#Reflection">Reflection</a></li>
+			<li><a href="#FuturePlan">Future Plan</a></li>
+		</ol>
+	</nav>
+	<main>
+		<h2 id="TheProblem">The Problem</h2>
+		<p>
+			In a traditional inverted index, we see a mapping from keywords to documents which
+			enables searching a corpus be it the web, email, or a research database. Oftentimes,
+			particularly while using a web search engine, users are not looking for a webpage - they are
+			looking for information inside the webpages. This means that question answering is a very
+			important topic in information retrieval, and is beginning to spawn new technologies like
+			Google’s Knowledge Graph.
+		</p>
+		<p>
+			An important subset of question answering is when users desire entities as search
+			results. Generally speaking an entity is a noun, and some of the most common entity classes
+			are “person”, “location”, and “organization”. The concept of entities as search results or as
+			search inputs, an “entity search,” is not easily supported by a traditional inverted index from
+			keywords to documents. Using such an inverted index would require scanning result document
+			contents and aggregating at search time, which is roundabout and expensive.
+		</p>
+		<p>
+			A far more natural implementation of an entity search would be an inverted index which
+			can map from both terms and entities, to both	documents and entities. This approach requires
+			that Named Entity Recognition (NER), and some level of aggregation, be completed at indexing
+			time. While this makes query time more efficient, it poses some challenges.
+		</p>
+		<h3 id="NamedEntityRecognition">Named Entity Recognition</h3>
+		<p>
+			One challenge of building an entity-aware system is the task of Named Entity
+			Recognition (NER). NER has been well studied, and there are a number of open source
+			implementations using a variety of approaches. There are broadly three categories of NER:
+			probabilistic, gazetteer, and rule-based.
+		</p>
+		<p>
+			Probabilistic approaches rely on machine learning techniques to identify features in text
+			which signal the existence of an entity. This often goes hand in hand with Part of Speech (POS)
+			tagging, which is also a well studied problem. Using a probabilistic approach to NER requires a
+			model is trained on an annotated training set, which can be tedious to produce.
+		</p>
+		<p>
+			Gazetteer approaches rely on a dictionary of known entities and some form of string
+			matching to identify where any of these entities exist in text. Exact string matching tends to
+			produce low recall in most scenarios, so there exist a number of approximate string matching
+			techniques in the literature for gazetteer NER. Though gazetteer NER can be quite powerful, a
+			complete and accurate dictionary of known entities can be difficult to produce.
+		</p>
+		<p>
+			Rule-based approaches are quite similar to probabilistic approaches in that they rely on
+			contextual features to identify entities. The difference is that these features are not learned, they
+			are specified by the user. Though this can work very well in some cases, it generally requires
+			deep domain knowledge and can be prohibitively tedious.
+		</p>
+		<p>
+			There are hybrid systems in existence. Stanford’s Conditional Random Field NER
+			classifier has the option of including a gazette during training of the probabilistic model. This
+			gazette is used as additional features for training the model, and does not guarantee that an
+			exact string match in the gazette will result in the associated entity tag. This is a very interesting
+			concept, as it may help to mitigate the need for a complete gazette, though its required labeled
+			training data may present an issue for a large number of entity types.
+		</p>
+		<p>
+			Generally, not one NER approach is sufficient for all cases. Domain and application
+			specific NER configuration is a must for enabling entity search, and has thus been one focus of
+			this research.
+		</p>
+		<h3 id="IndexDesign1">Index Design</h3>
+		<p>
+			Another challenge of building an entity aware system is the design of the index itself.
+			There can be a number of ways to represent entities within the index, and each has benefits
+			and drawbacks.
+		</p>
+		<p>
+			One approach would be to treat entity instances as documents. This is intuitive because
+			entities are search targets. However, this requires a good deal of preprocessing since one entity
+			instance can appear in a large number of documents. It may further complicate things when the
+			index is updated with new documents, as all of the entity instances in the new document require
+			changes be made to their corresponding entity documents. Additionally, there can be many
+			ways to store the context of each entity instance in an entity document so that the entity can be
+			searched; it is not unreasonable that these entity documents can become very large.
+		</p>
+		<p>
+			Another approach would be to simply tag entities within each document. This would
+			allow for a lighter preprocessing phase, though more work is required at query time to convert
+			document results into entity results.
+		</p>
+		<p>
+			Another approach would be to create a document for every appearance of an entity
+			instance. While this trivializes the problem of updating the index with new documents, it requires
+			aggregation be done at query time, which may be slow. Additionally, this can lead to a very large
+			number of entity occurrence documents in the index.
+		</p>
+		<p>
+			A final approach is to leverage the information stored in the index for each term to
+			document matching. If a term maps to a document, typically additional information such as
+			frequency of that term in the document is recorded. Entity instances near a term in that
+			document could be stored along with this information. This lessens the preprocessing
+			requirements, but makes search quite unnatural to implement. It is also counterintuitive.
+		</p>
+		<p>
+			The goal for this summer was set to create a demo system which can build and search
+			an entity aware inverted index, and is adaptable to a variety of corpuses and applications. As
+			one of three undergraduates on the team, my specific focus was on enabling NER and the
+			indexing process.
+		</p>
+		<h2 id="MyApproaches">My Approaches</h2>
+		<p>
+			To implement an entity aware inverted index, we examined the open source library
+			Lucene. Lucene provides a configurable framework for indexing documents and running
+			queries. On top of Lucene, there is an application called Solr which provides many features for
+			creating and managing a large distributed index. If Solr could be conceptualized as a car,
+			Lucene would be the engine. The team considered both extending Solr and Lucene. For the
+			reasons that both approaches would require fairly detailed knowledge of Lucene, and there is
+			no part of Solr essential for a basic entity aware inverted index library, the team decided
+			bypassing Solr to work directly with Lucene was the best approach.
+		</p>
+		<p>
+			Lucene documents are a set of “fields,” where each field contains a number of terms. In
+			the indexing process, some fields can be marked as “analyzed,” that is, the terms in that field
+			will become keys in the inverted index. This analyzation process typically involves tokenizing the
+			text of the field, filtering stop words, stemming, and so on.
+		</p>
+		<h3 id="NamedEntityRecognitionSystemDesign">Named Entity Recognition System Design</h3>
+		<p>
+			To preserve Lucene’s indexing procedure, it was first decided that NER would be
+			performed during analyzation. Later, however, this presented problems. To build an index,
+			Lucene requires the use of an “IndexWriter.” Each IndexWriter has its own analyzation process
+			for the documents passed to it. This means that to write the same document to two indexes, that
+			document must pass through the analyzation process of each IndexWriter. As NER is generally
+			expensive, this work duplication is not ideal. Additionally, this makes any aggregation between
+			documents impossible since the analyzation process is strictly sequential. For these reasons, a
+			NER preprocessing module was created outside of Lucene’s indexing process. The analyzation
+			phase is now simply to parse the formatted output of the NER preprocessing into terms and
+			entities.
+		</p>
+		<p>
+			Because the system should be flexible to multiple applications and domains, it is
+			essential that multiple types of NER are supported. To this end, the NER annotation module can
+			be configured to use any number of techniques in a defined order.
+		</p>
+		<p>
+			Each technique, regardless of implementation details, must generate a list of
+			“EntityAnnotations.” These annotations simply represent a token, which may or may not be an
+			entity. For each document, the EntityAnnotations from each NER technique are stored in an
+			ordered list of trees. The idea is that the root EntityAnnotations represent the longest tokens,
+			and all children of an EntityAnnotation represent tokens which are a sub-string of their parents.
+			These root EntityAnnotations are ordered by appearance in the input text. Each NER technique
+			has access to all of these annotations generated before it incase it could make use of them in its
+			own technique.
+		</p>
+		<p>
+			The reason for this structure is to allow for different NER techniques to return conflicting
+			annotations. At the completion of all NER techniques, a special set of rules can be defined to
+			reconcile these annotations. The EntityAnnotation trees do not need to be flattened, however. It
+			is possible to store multiple tokens at the same position in Lucene, so these differing
+			annotations can live together if that is desired.
+		</p>
+		<p>
+			A final consideration of the NER system is the structure of the entity types. It is intuitive
+			that entities can form a hierarchy - e.g. an “Actor” is an “Artist” is a “Person”. It is also intuitive
+			that entities can be of multiple types - an “Actor” may also be a “MovieDirector”. With these
+			insights in mind, the system allows users to specify an entity hierarchy, and for entities to take
+			on multiple types. During indexing, a token with multiple entity types will be recorded once for
+			each type, and once for any super types of its defined types. In this way, an entity such as
+			“Tommy Wiseau” may be found by searching any of “Person”, “Actor”, “Artist”, “MovieDirector”,
+			“ScreenWriter”, “Writer”, and “Agent”.
+		</p>
+		<h3 id="IndexDesign2">Index Design</h3>
+		<p>
+			Once NER has been completed, the approach for storing entities in the inverted index
+			did not utilize any aggregation. Instead, documents in the corpus represented as Lucene
+			documents remained the principle component indexed. For the keys of the index, entities
+			tagged in the documents were replaced by their entity type.
+		</p>
+		<p>For example, the document:</p>
+		<blockquote>Kathryn Aulabaugh goes to school at UIUC.</blockquote>
+		<p>With tags (not actually formatted like this):</p>
+		<blockquote>(“Kathryn Aulabaugh”, PERSON) (“goes”, O) (“to”, O) (“school”, O) (“at”, O) (“UIUC”, PLACE).</blockquote>
+		<p>
+			Would generate the following terms: “entity_person”, “goes”, “to”, “school”, “at”, “entity_place”.
+			All of these terms would map to the document in the inverted index.
+		</p>
+		<p>
+			However, the information about which person and which place these are is not lost.
+			Lucene has the concept of a “payload,” which is additional information stored about a term. A
+			Lucene postings file is of the format:
+		</p>
+		<blockquote>term absurd<br />&#9;doc 18<br />&#9;&#9;freq 1<br />&#9;&#9;pos 45<br />&#9;&#9;startOffset 254<br />&#9;&#9;endOffset 260<br />&#9;doc 70<br />&#9;&#9;freq 1<br />&#9;&#9;pos 8<br />&#9;&#9;startOffset 43<br />&#9;&#9;endOffset 49<br /></blockquote>
+		<p>
+			A payload would be stored along with the frequency, position, and offset information. We
+			leveraged this to store instance information of an entity. For example:
+		</p>
+		<blockquote>term entity_person!<br />&#9;doc 0<br />&#9;&#9;freq 1<br />&#9;&#9;pos 0<br />&#9;&#9;startOffset 0<br />&#9;&#9;endOffset 14<br />&#9;&#9;payload "Kathryn Aulabaugh"</blockquote>
+		<p>
+			This allows a search of the index to determine in which documents entities of a particular type
+			are located, and what the value for each is.
+		</p>
+		<p>
+			For storing entities as the values of the index, we again leveraged Lucene’s payload
+			concept. For a particular term’s appearance in a document, we can determine what entities are
+			in that term’s context. Context here means a token window of variable size. Going back to our
+			original document, the term “goes” could have the person entity “Kathryn Aulabaugh” in its context,
+			as well as the place entity “UIUC”. To map “goes” to “Kathryn Aulabaugh,” we structure the postings
+			as follows:
+		</p>
+		<blockquote>term goes<br />&#9;doc 0<br />&#9;&#9;freq 1<br />&#9;&#9;pos 1<br />&#9;&#9;startOffset 15<br />&#9;&#9;endOffset 19<br />&#9;&#9;payload [PERSON “Kathryn Aulabaugh” at pos 0], [PLACE “UIUC” at pos 5]</blockquote>
+		<p>
+			This allows entities to essentially be the values of the index. This does come with a number of
+			serious limitations, discussed in the “Reflection” section.
+		</p>
+		<h3 id="NamedEntityRecognitionTechniqueEvaluation">Named Entity Recognition Technique Evaluation</h3>
+		<p>
+			In addition to constructing a system to handle various NER techniques, several NER
+			techniques were surveyed and integrated into the demo. These techniques were then evaluated
+			to determine if using them for a web-scale corpus was feasible. Those evaluated included JFlex
+			pattern matching, Stanford’s Conditional Random Field Classifiers, DBPedia Spotlight,
+			Stanford’s TokensRegex, and an in-house gazetteer approach. Results are discussed below.
+		</p>
+		<h2 id="Results">Results</h2>
+		<p>
+			To test the demo system, a dataset consisting of many IMDB plot summaries for movies
+			and television shows was used. The source for the dataset is here: <a href="http://ftp.sunet.se/mirror/archive/ftp.sunet.se/pub/tv+movies/imdb/">http://ftp.sunet.se/mirror/archive/ftp.sunet.se/pub/tv+movies/imdb/</a>. 
+			For the entity hierarchy, DBPedia’s ontology was
+			used (found at <a href="http://mappings.dbpedia.org/server/ontology/classes/">http://mappings.dbpedia.org/server/ontology/classes/</a>). It is also from DBPedia
+			that all gazetteer entries are sourced. This data can be found on <a href="https://harrier01.cs.illinois.edu/scratch/DatasetArchives/Archives-Semesters/2017M/2017M-ERSearch">https://harrier01.cs.illinois.edu/scratch/DatasetArchives/Archives-Semesters/2017M/2017M-ERSearch</a>.
+		</p>
+		<p>
+			A central question to evaluating NER techniques was how they would perform with a
+			web-scale dataset. It is assumed that operating at such a scale would require a distributed
+			system over several machines. To evaluate techniques on one machine with a relatively small
+			dataset, runtimes were measured for indexing different numbers of documents. As this is a
+			sequential process, the growth was linear, and was used to extrapolate runtime for one billion
+			documents.
+		</p>
+		<p>
+			Additionally, the system was built to enable multithreading since Lucene’s IndexWriters
+			are thread safe. This significantly sped up the task, with maximum gain on my machine resulting
+			from four threads.
+		</p>
+		<h3 id="StanfordConditionalRandomFieldNERClassifiers">Stanford Conditional Random Field NER Classifiers</h3>
+		<p>
+			Stanford provides some pre-trained Conditional Random Field (CRF) classifiers for NER
+			tasks. There is a three class classifier, which tags people, locations, and organizations - and
+			there is a seven class classifier, which tags people, locations, organizations, money, percents,
+			dates, and times. It is also possible to train your own CRF classifiers with custom entity types,
+			though a annotated training data is required.
+		</p>
+		<p>
+			The evaluation of Stanford’s CRF classifiers is below. The runtimes represent the time to
+			perform NER annotation and add the documents to the index. To keep the evaluation consistent
+			with others, no non-entity tokens are recorded into the index.
+		</p>
+		<figure>
+			<img src="./img/StanfordCRF.png" alt="A chart plotting Runtime in seconds against numer of documents. For a 3 class classifier, the trendline is y = 0.0026x + 2.6539 with R squared 0.9981. For a 7 class classifier, the trendline is 0.0028x + 2.5211 with R squared 0.9953.">
+		</figure>
+		<p>
+			Extrapolating from the linear best-fit lines, using the three class classifier to index one
+			billion documents would take 31 days, and using the seven class classifier would take 32 days.
+		</p>
+		<p>
+			In addition to supplying an entity type hierarchy and a large number of named entities,
+			DBPedia offers a NER web service called DBPedia Spotlight. They host this web service, but it
+			can also be run on a local machine to reduce latency. Unfortunately my machine could did not
+			have the required specs to run the web service locally, so it was evaluated with DBPedia’s
+			hosting. Results are below.
+		</p>
+		<figure>
+			<img src="./img/DBPediaSpotlight.png" alt="A chart plotting Runtime in seconds against numer of documents. The trendline is y = 0.0578x + 0.932 with R squared 0.9984.">
+		</figure>
+		<p>
+			To index one billion documents, this process would take 669 days, which is too long for
+			our purposes.
+		</p>
+		<p>
+			JFlex pattern matching was also employed to identify entities which follow a well defined
+			pattern such as emails and phone numbers. Few entities follow patterns such as this, but
+			evaluating runtime using JFlex for just emails and phone numbers shows that it is effective while
+			not contributing to the overall runtime in an appreciable way. It is not capable of handling a large
+			number of patterns, however.
+		</p>
+		<p>
+			Gazetteer methods are also important for many applications, and were evaluated.
+			Stanford’s TokensRegex enables exact string matching through regular expressions. With ~1.1
+			million Named Entities from DBPedia, this was evaluated below.
+		</p>
+		<figure>
+			<img src="./img/StanfordTokensRegex.png" alt="A chart plotting Runtime in seconds against numer of documents. The trendline is y = 0.2264x - 2.269 with R squared 0.9833.">
+		</figure>
+		<p>
+			To index one billion documents would take 7.1 years, so it does not seem TokensRegex
+			was designed for such a large number of patterns.
+		</p>
+		<p>
+			We also created a simple exact string matching NER technique by building a prefix tree
+			from the DBPedia Named Entities. However, upon inspection of the tagging it was clear that
+			there existed a high recall with low precision problem. This was especially an issue for very
+			short Named Entities, and those which were common english words. In an attempt to correct
+			this issue, Part of Speech (POS) tagging was employed to restrict entities to noun phrases.
+			Results of measuring the number of tagged entities in 10000 documents while varying the
+			gazetteer size are shown below.
+		</p>
+		<figure>
+			<img src="./img/GazetteerTreeEntitiesTagged.png" alt="A chart plotting entities found against gazetteer size. The trendline for no POS is y = 1.5313x + 3125.8 with R squared 0.9855. The trendline for POS is y = 0.0291x - 17.078 with R squared 0.9975.">
+		</figure>
+		<p>
+			It seems that limiting the entities to noun phrases does improve precision. However,
+			there is a significant runtime cost of using POS tagging, as shown below (Entity Instances refers
+			to the number of Named Entities in the gazetteer).
+		</p>
+		<figure>
+			<img src="./img/GazetteerTreeExtractor.png" alt="A chart plotting runtime for one billion documents in days against entity instances. There are no trendlines. POS tagging begins over 300 days for 100000 documents and climbs, while No POS begins near zero but breaks 300 days by 700000.">
+		</figure>
+		<p>
+			Interestingly, runtime for using POS tagging remains relatively constant when increasing
+			the number of Entity Instances. A hypothesis for why this may be is because storing a large
+			number of EntityAnnotations (as with not using POS tagging) may be a major factor in
+			increasing runtime. To index one billion documents with a POS-enabled prefix tree gazetteer
+			with 1.1 million Named Entities would take 521 days.
+		</p>
+		<p>
+			Interestingly, Stanford allows the inclusion of a gazetteer when training a custom CRF
+			classifier. This gazetteer is used as an additional feature for the classifier, and it is not
+			guaranteed that an exact string match with a gazetteer entry will produce the associated tag if
+			other features have “higher weights” (see <a href="https://nlp.stanford.edu/software/crffaqshtml#gazette">https://nlp.stanford.edu/software/crffaqshtml#gazette</a>.
+			). Unfortunately, in order to include a gazetteer for an entity type, that entity
+			type must be labelled in the training data. This is limiting, since labelled training data is
+			expensive to produce. Still, using Named Entities of type PERSON from DBPedia and a small
+			provided labeled training file, three new CRF classifiers were produced and evaluated. They
+			had ~6k, ~250k, and ~550k gazetteer entries each. Results are below.
+		</p>
+		<figure>
+			<img src="./img/StanfordCRFGaz1.png" alt="A chart plotting runtime in seconds against number of documents. For 6075 instances, the trendline is y = 0.0012x + 0.8311 with R squared 0.9979. For 554834 instances, the trendline is y = 0.0111x - 0.9343 with R squared 0.9956. For 250000 instances, the trendline is 0.027x - 3.4958 with R squared 0.9971.">
+		</figure>
+		<p>
+			To index one billion documents with the 6k entries gazetteer would take 14 days, with
+			the 250k entries gazetteer would take 128 days, and with the 550k entries gazetteer would take
+			313 days. It is worth noting that all of these classifiers tag very few entities. This may be due to
+			the small training data, or due to not many names appearing in the dataset.
+		</p>
+		<figure>
+			<img src="./img/StanfordCRFGaz2.png" alt="A chart plotting entities tagged against number of documents. For 6075 instances, the trendline is 0.3245x - 68.572 with R squared 0.9969. For 554834 instances, the trendline is 0.3245x - 68.769 with R squared 0.9969. For 250000 instances, the trendline is 0.3594x - 77.076 with R Squared 0.9975.">
+		</figure>
+		<p>They also all tag roughly the same number of entities.</p>
+		<p>
+			One of the first questions tested was the space usage of the index. In our demo we
+			create two index types, Entity-Inverted (E-Inverted) and Document-Inverted (D-Inverted). The EInverted
+			index uses both entities and terms as keys to the index, and both documents and
+			entities as values. The method for this is described in the previous section. The D-Inverted index
+			uses both entities and terms as keys to the index, but only documents as values. The
+			justification for these types of indexes can be found in <cite>Cheng, T., Chang, K.: Beyond Pages:
+			Supporting Efficient, Scalable Entity Search with Dual-Inversion Index (2010)</cite>. Space usage for
+			these indexes is shown below.
+		</p>
+		<figure>
+			<img src="./img/SpaceUsageOfIndexes.png" alt="A chart plotting space in bytes against number of documents. For E-Inverted, the trendline is y = 71723x - 2.702E+6 with R squared 0.9988. For D-Inverted, the trendline is y = 2650.4x - 4170.6 with R squared 0.9994.">
+		</figure>
+		<p>
+			The exact figures for this chart should be considered with skepticism since the space
+			usage is not fully optimized, and this evaluation was done before the demo system was
+			complete. The main takeaway should be that the E-Inverted index uses much more space than
+			D-Inverted. That said, to index one billion documents our E-Inverted index would require 7.2 TB,
+			and our D-Inverted index would require 2.7 TB.
+		</p>
+		<h2 id="Assessment">Assessment</h2>
+		<p>
+			Our goal of building a demo system for an entity aware inverted index using Lucene was
+			realized this summer, though we did not achieve the full functionality of phpMyAdmin-like
+			EntityType management nor was our system design without flaws. The system is certainly not fit
+			for web-scale deployment. However, given the difficult nature of the problem, I feel that building
+			this system was important to begin evaluation of index design and NER challenges.
+		</p>
+		<h2 id="Reflection">Reflection</h2>
+		<p>
+			Prior to this project, I had no knowledge of NER techniques, and only understood
+			inverted indexes in an abstract way. Looking into the actual postings to see how documents are
+			stored, and working with Lucene to create tokens has given me a much lower level
+			understanding of the actual indexing process. While NER has been well studied, there are a
+			great number of considerations for using it to tag a large number of entity types for a large
+			corpus - and in this application of NER there seems to be much more work to do. Integration of
+			multiple types of NER is essential, and leveraging machine learning techniques to improve a
+			gazetteer approach or vice versa is very exciting and deserves continued work.
+		</p>
+		<p>
+			Our approach for leveraging payloads to store entities as values in the inverted index
+			now sticks out as a critical system flaw - this approach requires much aggregation at search
+			time and is extremely unnatural. As discussed in the first section, an approach with entities
+			themselves as Lucene documents seems superior. This requires more aggregation at indexing
+			time, and requires special considerations for updating the index with new documents, but seems
+			preferable to the current design.
+		</p>
+		<h2 id="FuturePlan">Future Plan</h2>
+		<p>
+			To further the work, a new system with entities as Lucene documents should be
+			constructed. This will allow for a more natural and efficient querying process, which is what must
+			be the focus of any search application. This will require much additional work in the NER
+			preprocessing phase, and a way to store entities in Lucene documents so that they are
+			searchable must be designed. This is all worthwhile work for making a better system.
+			Additionally, a deeper look into state of the art NER techniques must be conducted, especially
+			for methods which include gazetteers. Indexing the web for entities requires extremely robust
+			NER, and high efficiency. Reconciliation rules for entity tags from multiple NER techniques
+			should also be explored, though this may require knowledge of a specific application.
+		</p>
+	</main>
+</body>
+</html>

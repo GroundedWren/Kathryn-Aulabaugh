@@ -50,6 +50,9 @@
 			
 			max-width: 1100px;
 			height: auto;
+			
+			display: flex;
+			flex-direction: column;
 		}
 		#print.letter {
 			max-width: auto;
@@ -103,6 +106,7 @@
 		#contactLinks {
 			display: flex;
 			flex-direction: column;
+			font-size: 0.75em;
 		}
 		
 		address {
@@ -110,7 +114,12 @@
 		}
 		
 		main {
+			flex-grow: 1;
+			font-size: 0.9em;
 			border-top: 1px solid;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
 		}
 		
 		article {
@@ -128,6 +137,7 @@
 			align-items: center;
 			justify-content: space-between;
 			background-color: #E3E3E3;
+			padding-right: 5px;
 		}
 		
 		.article-heading-left {
@@ -149,68 +159,131 @@
 			<h1>Kathryn&nbsp;Aulabaugh</h1>
 			<div id="headerRight">
 				<div id="contactLinks">
-					<a href="tel:+19707449921">+1 (970)744-9921</a>
+					<a href="https://kathryn-aulabaugh.com">kathryn-aulabaugh.com</a>
 					<a href="mailto:kathryn.aulabaugh@gmail.com">kathryn.aulabaugh@gmail.com</a>
+					<a href="tel:+19707449921">+1 (970)744-9921</a>
 				</div>
 				<address>344 W Dayton St.<br />Apt 2Q<br />Madison, WI 53703</address>
 			</div>
 		</header>
 		<main>
-			<h2>Career</h2>
-			<article aria-labelledby="hSdEpic">
-				<div class="article-heading">
-					<h3 id="hSdEpic" class="article-heading-left">Software Developer at Epic Systems Corporation</h3>
-					<span>Intern 2015; Fill-time 2018-</span>
-				</div>
-				<h4>Automatically Filing Device Data</h4>
-				<ul>
-					<li>I created the <mark>front-end</mark> interface for a project to bring device data automatically into patients' charts.</li>
-					<li>I also implemented modified <mark>decision support</mark> based on this data.</li>
-					<li>I enhanced and measured database data retrieval <mark>perforamnce</mark>.</li>
-				</ul>
-				<h4>Nursing Documentation With a Web Framework</h4>
-				<ul>
-					<li>I migrated several components of clinical documentation to a web framework.</li>
-					<li>I designed a <mark>team-wide component</mark> for client event sequencing.</li>
-					<li>I've been a point of contact for several other teams interfacing with our components.</li>
-				</ul>
-				<h4>Accessible Clinical Administration</h4>
-				<ul>
-					<li>I evaluated and documented <mark>accessibility</mark> deficiencies across web interfaces for configuring four different types of records.</li>
-					<li>I worked closely with a user experience specialist to add a <mark>modern look and feel</mark> to these interfaces.</li>
-				</ul>
-				<h4>Patient Satisfaction Rounding</h4>
-				<ul>
-					<li>I conducted <mark>on-site research</mark> into user needs for a new workflow.</li>
-					<li>I designed and implemented a mechanism by which satisfaction rounding data could be excluded from the legal medical record.</li>
-				</ul>
-				<h4>Critical Fixes</h4>
-				<ul>
-					<li>I've completed fixes critical for <mark>patient safety</mark> and performance on short timelines.</li>
-				</ul>
-				<h4>R&D Team Lead, Mentoring, and Coaching</h4>
-				<ul>
-					<li><mark>I designed an intern project</mark> for nursing documentation review, then guided an intern through it.</li>
-					<li>I've been a <mark>design coach</mark> for my team to guide new-hires through their first technical writing assignments.</li>
-					<li>I <mark>managed a team</mark> of three new developers.</li>
-				</ul>
-			</article>
-			<article aria-labelledby="hForward">
+			<div>
+				<h2>Career</h2>
+				<article aria-labelledby="hSdEpic">
+					<div class="article-heading">
+						<h3 id="hSdEpic" class="article-heading-left">Software Developer at Epic Systems Corporation</h3>
+						<span>Intern 2015; Full-time 2018-</span>
+					</div>
+					<h4>Automatically Filing Device Data</h4>
+					<ul>
+						<li>I created the <mark>front-end</mark> interface for a project to bring device data automatically into patients' charts.</li>
+						<li>I also implemented modified <mark>decision support</mark> based on this data.</li>
+						<li>I enhanced and measured database data retrieval <mark>perforamnce</mark>.</li>
+					</ul>
+					<h4>Nursing Documentation With a Web Framework</h4>
+					<ul>
+						<li>I migrated several components of clinical documentation to a web framework.</li>
+						<li>I designed a <mark>team-wide component</mark> for client event sequencing.</li>
+						<li>I've been a point of contact for several other teams interfacing with our components.</li>
+					</ul>
+					<h4>Accessible Clinical Administration</h4>
+					<ul>
+						<li>I evaluated and documented <mark>accessibility</mark> deficiencies across web interfaces for configuring four different types of records.</li>
+						<li>I worked closely with a user experience specialist to add a <mark>modern look and feel</mark> to these interfaces.</li>
+					</ul>
+					<h4>Patient Satisfaction Rounding</h4>
+					<ul>
+						<li>I conducted <mark>on-site research</mark> into user needs for a new workflow.</li>
+						<li>I designed and implemented a mechanism by which satisfaction rounding data could be excluded from the legal medical record.</li>
+					</ul>
+					<h4>Critical Fixes</h4>
+					<ul>
+						<li>I've completed fixes critical for <mark>patient safety</mark> and performance on short timelines.</li>
+					</ul>
+					<h4>R&D Team Lead, Mentoring, and Coaching</h4>
+					<ul>
+						<li><mark>I designed an intern project</mark> for nursing documentation review, then guided an intern through it.</li>
+						<li>I've been a <mark>design coach</mark> for my team to guide new-hires through their first technical writing assignments.</li>
+						<li>I <mark>managed a team</mark> of three new developers.</li>
+					</ul>
+				</article>
+				<article aria-labelledby="hForward">
 				<div class="article-heading">
 					<h3 id="hForward" class="article-heading-left">Research Assistant at The UIUC Forward Data Lab</h3>
 					<span>2017</span>
 				</div>
+				<ul>
+					<li>I worked in a small team of undergraduates to construct a prototype entity-aware <mark>information retrieval</mark> system: <a href="./EntitySearchReport.html">Entity Search</a>.</li>
+					<li>I extended Apache Lucene to incorporate various <mark>Named Entity Recognition</mark> techniques into its indexing process.</li>
+				</ul>
 			</article>
-			<h2>Education</h2>
-			<article aria-labelledby="hUIUC">
+			</div>
+			<div>
+				<h2>Personal Projects</h2>
+				<article aria-labelledby="hGroundedWren">
+					<div class="article-heading">
+						<h3 id="hGroundedWren" class="article-heading-left"><a href="https://groundedwren.com/">GroundedWren Personal Website</a></h3>
+						<span>2022-</span>
+					</div>
+					<ul>
+						<li>I've refined my <mark>web development</mark> skills by creating a personal website from scratch.</li>
+						<li>It contains an art gallery, a music repository, a blog, a poker winnings calculator, and more.</li>
+					</ul>
+				</article>
+				<article aria-labelledby="hTextAdventure">
+					<div class="article-heading">
+						<h3 id="hTextAdventure" class="article-heading-left"><a href="https://textadventure.groundedwren.com">Text Adventure Suite</a></h3>
+						<span>2023-</span>
+					</div>
+					<ul>
+						<li>I am creating a fully accessible system to construct and play text-based adventure games in a browser</li>
+					</ul>
+				</article>
+				<article aria-labelledby="hDND">
+				<div class="article-heading">
+					<h3 id="hDND" class="article-heading-left">VBA D&D Character Sheet</h3>
+					<span>2020-2023</span>
+				</div>
+				<ul>
+					<li>Using Excel's <mark>Visual Basic for Applications</mark>, I've created a robust character sheet template for the table-top game D&D.</li>
+					<li>Features include an extensive spell database, audited dice rolls, twelve colorful themes, and an in-sheet notebook.</li>
+				</ul>
+			</article>
+			</div>
+			<div>
+				<h2>Other Experience</h2>
+				<article aria-labelledby="hLiteracy">
+					<div class="article-heading">
+						<h3 id="hLiteracy" class="article-heading-left">Tutor at Literacy Network</h3>
+						<span>2021-2022</span>
+					</div>
+					<ul>
+						<li>For two semesters, I attended weekly classes with <mark>adult students</mark> to support the lesson-plan and assist individual students.</li>
+						<li>We instructed science and social studies to further students goals of achieving a High School Equivalency Diploma.</li>
+					</ul>
+				</article>
+				<article aria-labelledby="hNeocities">
+				<div class="article-heading">
+					<h3 id="hNeocities" class="article-heading-left">Hobbyist Web Development Mentor</h3>
+					<span>2023-</span>
+				</div>
+				<ul>
+					<li>I'm active in <a href="https://neocities.org/">Neocities</a> forums answering questions about web development from mostly young learners.</li>
+				</ul>
+			</article>
+			</div>
+			<div>
+				<h2>Education</h2>
+				<article aria-labelledby="hUIUC">
 				<div class="article-heading">
 					<h3 id="hUIUC" class="article-heading-left">Bachelor of Science in Computer Science with High Honors</h3>
 					<span>2018</span>
 				</div>
+				<ul>
+					<li>I focused particularly on algorithms, information retrieval, and <mark><a href="./EasyRayManual.pdf">computer graphics</a></mark>.</li>
+				</ul>
 			</article>
-			<h2>Personal Projects</h2>
-			<h2>Experience</h2>
-			<h2>Skills</h2>
+			</div>
 		</main>
 	</div>
 	<footer>
