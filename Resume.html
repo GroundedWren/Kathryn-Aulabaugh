@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Resume of Kathryn Aulabaugh">
+	<title>Resume - Kathryn Aulabaugh</title>
+
+	<script>
+		(function registerNs(ns) {
+			ns.SIZE_CLASS_KEY = "gw-size-class";
+			ns.currentSizeClass = "";
+			ns.onSelSizeChange = (_event) =>
+			{
+				const printDiv = document.getElementById("print");
+				if (ns.currentSizeClass)
+				{
+					printDiv.classList.remove(ns.currentSizeClass);
+				}
+				
+				ns.currentSizeClass = document.getElementById("selSize").value
+				printDiv.classList.add(ns.currentSizeClass);
+				localStorage.setItem(ns.SIZE_CLASS_KEY, ns.currentSizeClass);
+			};
+		}) (window.GW = {});
+		
+		window.addEventListener("load", function onLoad(_event)
+		{
+			const storedSize = localStorage.getItem(GW.SIZE_CLASS_KEY);
+			if (storedSize)
+			{
+				document.getElementById("selSize").value = storedSize;
+				GW.onSelSizeChange();
+			}
+		});
+		
+		window.addEventListener("beforeunload", function onBeforeUnload(event)
+		{
+		});
+	</script>
+	
+	<link rel="stylesheet" href="./styles/main.css" type="text/css">
+	<style>
+		#print {
+			padding: 5px;
+			box-shadow: 0px 0px 3px 0px black;
+			margin: 5px;
+			margin-left: auto;
+			margin-right: auto;
+			
+			max-width: 1100px;
+			height: auto;
+		}
+		#print.letter {
+			max-width: auto;
+			width: 215.9mm;
+			height: 279.4mm;
+		}
+		#print.a4 {
+			max-width: auto;
+			width: 210mm;
+			height: 297mm;
+		}
+		@media print {
+			#print {
+				margin: 0px;
+				box-shadow: none;
+			}
+			footer {
+				display: none;
+			}
+		}
+		
+		footer {
+			border-top: 1px solid;
+			max-width: 1100px;
+			margin: auto;
+		}
+		
+		h1, h2 {
+			text-align: center;
+		}
+		
+		header {
+			display: flex;
+			flex-direction: row;
+			align-items: flex-end;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 5px;
+		}
+		
+		#headerRight {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			flex-grow: 1;
+			align-items: flex-end;
+			justify-content: space-around;
+			gap: 5px;
+		}
+		
+		#contactLinks {
+			display: flex;
+			flex-direction: column;
+		}
+		
+		address {
+			font-size: 0.75em;
+		}
+		
+		main {
+			border-top: 1px solid;
+		}
+		
+		article {
+			border-left: 2px solid;
+			padding-left:2px;
+		}
+		
+		article + article {
+			margin-top: 5px;
+		}
+		
+		.article-heading {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			background-color: #E3E3E3;
+		}
+		
+		.article-heading-left {
+			background-color: white;
+			border-radius: 0 20px 20px 0;
+			padding-right: 5px;
+			margin-bottom: 3px;
+			margin-right: 5px;
+		}
+		
+		ul {
+			margin: 0px;
+		}
+	</style>
+</head>
+<body>
+	<div id="print">
+		<header>
+			<h1>Kathryn&nbsp;Aulabaugh</h1>
+			<div id="headerRight">
+				<div id="contactLinks">
+					<a href="tel:+19707449921">+1 (970)744-9921</a>
+					<a href="mailto:kathryn.aulabaugh@gmail.com">kathryn.aulabaugh@gmail.com</a>
+				</div>
+				<address>344 W Dayton St.<br />Apt 2Q<br />Madison, WI 53703</address>
+			</div>
+		</header>
+		<main>
+			<h2>Career</h2>
+			<article aria-labelledby="hSdEpic">
+				<div class="article-heading">
+					<h3 id="hSdEpic" class="article-heading-left">Software Developer at Epic Systems Corporation</h3>
+					<span>Intern 2015; Fill-time 2018-</span>
+				</div>
+				<h4>Automatically Filing Device Data</h4>
+				<ul>
+					<li>I created the <mark>front-end</mark> interface for a project to bring device data automatically into patients' charts.</li>
+					<li>I also implemented modified <mark>decision support</mark> based on this data.</li>
+					<li>I enhanced and measured database data retrieval <mark>perforamnce</mark>.</li>
+				</ul>
+				<h4>Nursing Documentation With a Web Framework</h4>
+				<ul>
+					<li>I migrated several components of clinical documentation to a web framework.</li>
+					<li>I designed a <mark>team-wide component</mark> for client event sequencing.</li>
+					<li>I've been a point of contact for several other teams interfacing with our components.</li>
+				</ul>
+				<h4>Accessible Clinical Administration</h4>
+				<ul>
+					<li>I evaluated and documented <mark>accessibility</mark> deficiencies across web interfaces for configuring four different types of records.</li>
+					<li>I worked closely with a user experience specialist to add a <mark>modern look and feel</mark> to these interfaces.</li>
+				</ul>
+				<h4>Patient Satisfaction Rounding</h4>
+				<ul>
+					<li>I conducted <mark>on-site research</mark> into user needs for a new workflow.</li>
+					<li>I designed and implemented a mechanism by which satisfaction rounding data could be excluded from the legal medical record.</li>
+				</ul>
+				<h4>Critical Fixes</h4>
+				<ul>
+					<li>I've completed fixes critical for <mark>patient safety</mark> and performance on short timelines.</li>
+				</ul>
+				<h4>R&D Team Lead, Mentoring, and Coaching</h4>
+				<ul>
+					<li><mark>I designed an intern project</mark> for nursing documentation review, then guided an intern through it.</li>
+					<li>I've been a <mark>design coach</mark> for my team to guide new-hires through their first technical writing assignments.</li>
+					<li>I <mark>managed a team</mark> of three new developers.</li>
+				</ul>
+			</article>
+			<article aria-labelledby="hForward">
+				<div class="article-heading">
+					<h3 id="hForward" class="article-heading-left">Research Assistant at The UIUC Forward Data Lab</h3>
+					<span>2017</span>
+				</div>
+			</article>
+			<h2>Education</h2>
+			<article aria-labelledby="hUIUC">
+				<div class="article-heading">
+					<h3 id="hUIUC" class="article-heading-left">Bachelor of Science in Computer Science with High Honors</h3>
+					<span>2018</span>
+				</div>
+			</article>
+			<h2>Personal Projects</h2>
+			<h2>Experience</h2>
+			<h2>Skills</h2>
+		</main>
+	</div>
+	<footer>
+		<p>Last updated: <time datetime="2024-02-04T21:29:35.486Z">Feb 4, 2024</time></p>
+		<input-vertical>
+			<label for="selSize">Size</label>
+			<select id="selSize" onchange="GW.onSelSizeChange(event)">
+				<option value="webpage" selected>Webpage</option>
+				<option value="letter">Letter</option>
+				<option value="a4">A4</option>
+			</select>
+		</input-vertical>
+	</footer>
+</body>
+</html>
