@@ -155,6 +155,13 @@
 		ul {
 			margin: 0px;
 		}
+		
+		footer {
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+			gap: 15px;
+		}
 	</style>
 </head>
 <body>
@@ -291,7 +298,6 @@
 		</main>
 	</div>
 	<footer>
-		<p>Last updated: <time datetime="2024-02-04T21:29:35.486Z">Feb 4, 2024</time></p>
 		<input-vertical>
 			<label for="selSize">Size</label>
 			<select id="selSize" onchange="GW.onSelSizeChange(event)">
@@ -300,6 +306,7 @@
 				<option value="a4">A4</option>
 			</select>
 		</input-vertical>
+		<p>Last updated: <time datetime="2024-02-04T21:29:35.486Z">Feb 4, 2024</time></p>
 	</footer>
 </body>
 </html>
