@@ -18,16 +18,19 @@
 		});
 	</script>
 	
+	<link rel="stylesheet" href="./styles/variables.css" type="text/css">
 	<link rel="stylesheet" href="./styles/main.css" type="text/css">
+	
+	<!-- I'm only hotlinking myself don't worry -->
+	<script src="https://groundedwren.neocities.org/scripts/controls/personalizationControl.js"></script>
+	<link rel="stylesheet" href="https://groundedwren.neocities.org/styles/controls/personalizationControl.css" type="text/css">
+	
 	<style>
-		header {
-			text-align: center;
-		}
-		header p {
+		header p, header h1 {
 			margin: 0;
 		}
 		
-		nav {
+		#navContent {
 			width: fit-content;
 			margin: auto;
 			border: 1px solid;
@@ -35,7 +38,7 @@
 			margin-top: 5px;
 		}
 		
-		nav ol {
+		#navContent ol {
 			padding-top: 0;
 			padding-bottom: 0;
 		}
@@ -46,7 +49,7 @@
 			margin-top: 5px;
 			margin-bottom: 5px;
 			padding: 5px;
-			box-shadow: 0px 0px 3px 0px black
+			box-shadow: 0px 0px 3px 0px var(--text-color);
 		}
 		
 		blockquote {
@@ -64,14 +67,28 @@
 	</style>
 </head>
 <body>
-	<header>
-		<h1>Entity Search Summer 2017 Research Report</h1>
-		<p>
-			Kathryn Aulabaugh<br />
-			Written <time datetime="2017-08-25T05:00:00.000Z">Aug 25, 2017</time>; Transcribed <time datetime="2024-02-04T21:29:35.486Z">Feb 4, 2024</time>
-		</p>
+	<header id="mainHeader">
+		<div id="mainHeaderLeft">
+			<a class="hide-until-focus" href="#main">Skip to content</a>
+			<nav class="breadcrumb" aria-label="Breadcrumb">
+				<ol>
+					<li><a href="./index.html">Kathryn Aulabaugh</a></li>
+					<li><a href="" aria-current="page">Entity Search</a></li>
+				</ol>
+			</nav>
+		</div>
+		<div>
+			<h1>Entity Search Summer 2017 Research Report</h1>
+			<p>
+				Kathryn Aulabaugh<br />
+				Written <time datetime="2017-08-25T05:00:00.000Z">Aug 25, 2017</time>; Transcribed <time datetime="2024-02-04T21:29:35.486Z">Feb 4, 2024</time>
+			</p>
+		</div>
+		<div id="mainHeaderRight">
+			<gw-personalization></gw-personalization>
+		</div>
 	</header>
-	<nav>
+	<nav id="navContent">
 		<h2>Contents</h2>
 		<ol>
 			<li>
@@ -100,7 +117,7 @@
 			<li><a href="#FuturePlan">Future Plan</a></li>
 		</ol>
 	</nav>
-	<main>
+	<main id="main">
 		<h2 id="TheProblem">The Problem</h2>
 		<p>
 			In a traditional inverted index, we see a mapping from keywords to documents which
