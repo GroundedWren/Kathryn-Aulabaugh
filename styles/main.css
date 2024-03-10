@@ -191,6 +191,8 @@ mark {
 
 button[aria-expanded="true"], button[aria-pressed="true"] {
 	background-color: var(--selected-color);
+	font-weight: bold;
+	font-style: italic;
 }
 
 .input-vertical {
