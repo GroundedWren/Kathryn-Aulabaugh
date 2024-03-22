@@ -33,22 +33,24 @@
   --mark-color: #FFFF00;
 }
 
-.theme-dark {
-  --background-color: #000000;
-  --background-color-2: #242424;
-  --text-color: #FFFFFF;
-  --border-color: #FFFFFF;
-  --selected-color: #223891;
-  --button-face-color: #474747;
-  --button-text-color: #FFFFFF;
-  --input-text-color: #FFFFFF;
-  --input-background-color: #000000;
-  --link-color: #74D7EE;
-  --link-background-color: #3C5054;
-  --focus-color: #FF0701;
-  --icon-color: #FFFFFF;
-  --banner-color: #404040;
-  --mark-color: #2F3780;
+@media not print {
+	.theme-dark {
+	  --background-color: #000000;
+	  --background-color-2: #242424;
+	  --text-color: #FFFFFF;
+	  --border-color: #FFFFFF;
+	  --selected-color: #223891;
+	  --button-face-color: #474747;
+	  --button-text-color: #FFFFFF;
+	  --input-text-color: #FFFFFF;
+	  --input-background-color: #000000;
+	  --link-color: #74D7EE;
+	  --link-background-color: #3C5054;
+	  --focus-color: #FF0701;
+	  --icon-color: #FFFFFF;
+	  --banner-color: #404040;
+	  --mark-color: #2F3780;
+	}
 }
 
 .font-small {
