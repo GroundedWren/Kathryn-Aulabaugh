@@ -10,7 +10,7 @@
 		(function registerNs(ns) {
 			ns.SIZE_CLASS_KEY = "gw-size-class";
 			ns.currentSizeClass = "";
-			ns.onSelSizeChange = (_event) =>
+			ns.onConfirmSizeChange = (event) =>
 			{
 				const printDiv = document.getElementById("print");
 				if (ns.currentSizeClass)
@@ -21,6 +21,8 @@
 				ns.currentSizeClass = document.getElementById("selSize").value
 				printDiv.classList.add(ns.currentSizeClass);
 				localStorage.setItem(ns.SIZE_CLASS_KEY, ns.currentSizeClass);
+				
+				event?.preventDefault();
 			};
 		}) (window.GW = {});
 		
@@ -30,7 +32,7 @@
 			if (storedSize)
 			{
 				document.getElementById("selSize").value = storedSize;
-				GW.onSelSizeChange();
+				GW.onConfirmSizeChange();
 			}
 		});
 		
@@ -42,8 +44,7 @@
 	<link rel="stylesheet" href="./styles/variables.css" type="text/css">
 	<link rel="stylesheet" href="./styles/main.css" type="text/css">
 	
-	<!-- I'm only hotlinking myself don't worry -->
-	<script src="https://groundedwren.neocities.org/scripts/controls/personalizationControl.js"></script>
+	<script src="./scripts/personalizationControl.js"></script>
 	
 	<style>
 		#print {
@@ -91,6 +92,11 @@
 			
 			border-top: 1px solid;
 			margin: auto;
+		}
+		#formSize {
+			display: flex;
+			gap: 5px;
+			align-items: flex-end;
 		}
 		
 		h1, h3, h3 {
@@ -343,14 +349,17 @@
 		</main>
 	</div>
 	<footer>
-		<div class="input-vertical">
-			<label for="selSize">Size</label>
-			<select id="selSize" onchange="GW.onSelSizeChange(event)">
-				<option value="webpage" selected>Webpage</option>
-				<option value="letter">Letter</option>
-				<option value="a4">A4</option>
-			</select>
-		</div>
+		<form id="formSize" aria-labelledby="lblSize" onsubmit="GW.onConfirmSizeChange(event)">
+			<div class="input-vertical">
+				<label id="lblSize" for="selSize">Size</label>
+				<select id="selSize">
+					<option value="webpage" selected>Webpage</option>
+					<option value="letter">Letter</option>
+					<option value="a4">A4</option>
+				</select>
+			</div>
+			<input type="submit" value="Apply">
+		</form>
 		<p>Last updated: <time datetime="2024-03-21T21:29:35.486Z">Mar 21, 2024</time></p>
 	</footer>
 </body>
