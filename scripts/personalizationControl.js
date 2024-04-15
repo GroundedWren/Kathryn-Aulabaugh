@@ -155,24 +155,27 @@ registerNamespace("GW.Controls", function(ns)
           
           button, select
           {
-            background-color: var(--button-face-color);
-            color: var(--button-text-color);
-            border: 1px solid var(--link-color);
+            background-color: var(--button-face-color, #DEDEDE);
+            color: var(--button-text-color, #000000);
+            border: 1px solid var(--link-color, #0000EE);
             cursor: pointer;
             min-width: 30px;
             min-height: 30px;
           }
           
           button[aria-expanded="true"], button[aria-pressed="true"] {
-            background-color: var(--selected-color);
+            background-color: var(--selected-color, #90CBDB);
             font-weight: bold;
             font-style: italic;
           }
           
-          :focus-visible {
-          	outline-width: 10px;
-          	outline-color: var(--focus-color);
-          	z-index: 100;
+          :focus-visible, *[tabindex="-1"]:focus {
+            outline-width: 4px;
+            outline-color: var(--focus-color, #FF0701);
+            outline-style: solid;
+            outline-offset: 1px;
+            position: relative;
+            z-index: 100;
           }
         </style>
         
