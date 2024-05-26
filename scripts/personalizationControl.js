@@ -26,7 +26,7 @@ registerNamespace("GW.Controls", function(ns)
     identifier;
     scopeEl;
     
-    currentTheme = "theme-light";
+    currentTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "theme-dark" : "theme-light";
     currentFontSize = "font-normal";
     currentFontFamily = "font-segoe-ui";
     
@@ -86,7 +86,10 @@ registerNamespace("GW.Controls", function(ns)
       this.scopeEl.classList.remove(this.currentTheme);
       this.currentTheme = thName || this.currentTheme;
       this.scopeEl.classList.add(this.currentTheme);
-      localStorage.setItem(this.themeKey, this.currentTheme);
+      if(thName)
+      {
+        localStorage.setItem(this.themeKey, this.currentTheme);
+      }
       
       this.lightThemeBtn.setAttribute("aria-pressed", this.currentTheme === "theme-light");
       this.darkThemeBtn.setAttribute("aria-pressed", this.currentTheme === "theme-dark");
