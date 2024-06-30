@@ -173,13 +173,17 @@ button, input[type="button"], input[type="submit"], input[type="reset"], input[t
 	min-height: 30px;
 }
 
-button[disabled], select[disabled], input[type="button"][disabled], input[type="submit"][disabled], input[type="reset"][disabled], input[type="file"][disabled]::file-selector-button {
+summary {
+	padding: 3px;
+}
+
+:is(button, select, input[type="button"], input[type="submit"], input[type="reset"])[disabled], input[type="file"][disabled]::file-selector-button {
 	text-decoration: line-through;
 	border: 1px solid var(--border-color);
 	opacity: 0.5;
 }
 
-button[disabled]:hover, select[disabled]:hover, input[type="button"][disabled]:hover, input[type="submit"][disabled]:hover, input[type="reset"][disabled]:hover, input[type="file"][disabled]::file-selector-button:hover {
+:is(button, select, input[type="button"], input[type="submit"], input[type="reset"])[disabled]:hover, input[type="file"][disabled]::file-selector-button:hover {
 	cursor: not-allowed;
 }
 
