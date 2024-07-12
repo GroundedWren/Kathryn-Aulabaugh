@@ -64,8 +64,8 @@ a[href] {
   outline-style: dashed;
 }
 
-button, label {
-	cursor: pointer;
+summary, label, input:is([type="checkbox"], [type="radio"]) {
+  cursor: pointer;
 }
 
 table, th, td {
@@ -164,7 +164,11 @@ footer {
 	padding: 2px
 }
 
-button, input[type="button"], input[type="submit"], input[type="reset"], input[type="file"]::file-selector-button, select, summary {
+summary {
+	padding: 3px;
+}
+
+button, input:is([type="button"], [type="submit"], [type="reset"]), input[type="file"]::file-selector-button, select, summary {
 	background-color: var(--button-face-color);
 	color: var(--button-text-color);
 	border: 1px solid var(--link-color);
@@ -173,23 +177,30 @@ button, input[type="button"], input[type="submit"], input[type="reset"], input[t
 	min-height: 30px;
 }
 
-summary {
-	padding: 3px;
+button[aria-expanded="true"], button[aria-pressed="true"], details[open] summary {
+	background-color: var(--selected-color);
+	font-weight: bold;
+	font-style: italic;
 }
 
-:is(button, select, input[type="button"], input[type="submit"], input[type="reset"])[disabled], input[type="file"][disabled]::file-selector-button {
+:is(button, select, input:is([type="button"], [type="submit"], [type="reset"]))[disabled], input[type="file"][disabled]::file-selector-button {
 	text-decoration: line-through;
 	border: 1px solid var(--border-color);
 	opacity: 0.5;
 }
 
-:is(button, select, input[type="button"], input[type="submit"], input[type="reset"])[disabled]:hover, input[type="file"][disabled]::file-selector-button:hover {
+:is(button, select, input:is([type="button"], [type="submit"], [type="reset"]))[disabled]:hover, input[type="file"][disabled]::file-selector-button:hover {
 	cursor: not-allowed;
 }
 
-input[type="text"], input[type="password"], input[type="number"], input[type="email"], textarea {
+input:is([type="text"], [type="password"], [type="number"], [type="email"]), textarea {
 	color: var(--input-text-color);
 	background-color: var(--input-background-color);
+}
+
+:is(input:is([type="text"], [type="password"], [type="number"], [type="email"]), textarea):invalid {
+	box-shadow: inset 0px 0px 5px 2px var(--selected-color);
+	border-color: var(--selected-color);
 }
 
 textarea {
@@ -197,19 +208,9 @@ textarea {
 	min-width: 60px;
 }
 
-select {
-	cursor: pointer;
-}
-
 mark {
 	background-color: var(--mark-color);
 	color: var(--text-color);
-}
-
-button[aria-expanded="true"], button[aria-pressed="true"] {
-	background-color: var(--selected-color);
-	font-weight: bold;
-	font-style: italic;
 }
 
 .input-vertical {
