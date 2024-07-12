@@ -1,21 +1,4 @@
-:root {
-  --background-color: #FFFFFF;
-  --background-color-2: #E3E3E3;
-  --text-color: #000000;
-  --border-color: #000000;
-  --selected-color: #90CBDB;
-  --button-face-color: #DEDEDE;
-  --button-text-color: #000000;
-  --input-text-color: #000000;
-  --input-background-color: #FFFFFF;
-  --link-color: #0000EE;
-  --link-background-color: #BDE0F2;
-  --focus-color: #FF0701;
-  --icon-color: #000000;
-  --banner-color: #B3B3B3;
-}
-
-.theme-light {
+:root, .theme-light {
   --background-color: #FFFFFF;
   --background-color-2: #E3E3E3;
   --text-color: #000000;
@@ -31,6 +14,7 @@
   --icon-color: #000000;
   --banner-color: #B3B3B3;
   --mark-color: #FFFF00;
+  --accent-color: #D5B3D9;
 }
 
 @media not print {
@@ -50,6 +34,7 @@
 	  --icon-color: #FFFFFF;
 	  --banner-color: #404040;
 	  --mark-color: #2F3780;
+	  --accent-color: #8D4A95;
 	}
 }
 
