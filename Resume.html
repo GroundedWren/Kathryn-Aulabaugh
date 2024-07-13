@@ -169,28 +169,32 @@
 		main article {
 			border-left: 2px solid;
 			padding-left:2px;
-		}
-		
-		main article + article {
-			margin-top: 5px;
-		}
-		
-		.article-heading {
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-			justify-content: space-between;
-			background-color: var(--background-color-2);
-			padding-right: 5px;
-			margin-bottom: 2px;
-		}
-		
-		.article-heading-left {
-			background-color: var(--background-color);
-			border-radius: 0 10px 0 0;
-			padding-right: 5px;
-			margin-top: 3px;
-			margin-right: 5px;
+			
+			+ article {
+				margin-top: 5px;
+			}
+			
+			.header {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: space-between;
+				background-color: var(--background-color-2);
+				padding-right: 5px;
+				margin-bottom: 2px;
+				
+				.title {
+					background-color: var(--background-color);
+					border-radius: 0 10px 0 0;
+					padding-right: 5px;
+					margin-top: 3px;
+					margin-right: 5px;
+				}
+				
+				.duration {
+					word-break: keep-all;
+				}
+			}
 		}
 		
 		ul {
@@ -227,16 +231,16 @@
 						<a href="mailto:kathryn.aulabaugh@gmail.com">kathryn.aulabaugh@gmail.com</a>
 						<a href="tel:+19707449921">+1 (970)744-9921</a>
 					</div>
-					<address>344 W Dayton St.<br />Apt 2Q<br />Madison, WI 53703</address>
+					<address>7449 Weekend Way<br />Apt 502<br />Madison, WI 53719</address>
 				</div>
 			</section>
 			<section id="resumeBody">
 				<div>
 					<h3>Career</h3>
 					<article aria-labelledby="hSdEpic">
-						<div class="article-heading">
-							<h4 id="hSdEpic" class="article-heading-left">Software Developer at Epic Systems Corporation</h4>
-							<span>Intern 2015; Full-time 2018-</span>
+						<div class="header">
+							<h4 id="hSdEpic" class="title">Software Developer at Epic Systems Corporation</h4>
+							<span class="duration">Intern 2015; Full-time 2018-</span>
 						</div>
 						<h5>Automatically Filing Medical Device Data</h5>
 						<ul>
@@ -272,9 +276,9 @@
 						</ul>
 					</article>
 					<article aria-labelledby="hForward">
-						<div class="article-heading">
-							<h4 id="hForward" class="article-heading-left">Research Assistant at The UIUC Forward Data Lab</h4>
-							<span>2017</span>
+						<div class="header">
+							<h4 id="hForward" class="title">Research Assistant at The UIUC Forward Data Lab</h4>
+							<span class="duration">2017</span>
 						</div>
 						<ul>
 							<li>I worked in a small team of undergraduates to construct a prototype entity-aware <mark>information retrieval</mark> system: <a href="./EntitySearchReport.html">Entity Search</a>.</li>
@@ -285,28 +289,28 @@
 				<div>
 					<h3>Personal Projects</h3>
 					<article aria-labelledby="hTextAdventure">
-						<div class="article-heading">
-							<h4 id="hTextAdventure" class="article-heading-left"><a href="https://lyrics.groundedwren.com">Lyric Analyzer</a></h4>
-							<span>2024</span>
+						<div class="header">
+							<h4 id="hTextAdventure" class="title"><a href="https://lyrics.groundedwren.com">Lyric Analyzer</a></h4>
+							<span class="duration">2024</span>
 						</div>
 						<ul>
 							<li>I created an accessible tool to review and search for lyrical trends across musicians' discographies.</li>
 						</ul>
 					</article>
 					<article aria-labelledby="hGroundedWren">
-						<div class="article-heading">
-							<h4 id="hGroundedWren" class="article-heading-left"><a href="https://groundedwren.com/">GroundedWren Personal Website</a></h4>
-							<span>2022-</span>
+						<div class="header">
+							<h4 id="hGroundedWren" class="title"><a href="https://groundedwren.neocities.org/">Front-End Tools and Mentoring</a></h4>
+							<span class="duration">2022-</span>
 						</div>
 						<ul>
-							<li>I'm refining my <mark>web development</mark> skills by creating a personal website from scratch.</li>
-							<li>It contains an art gallery, a music repository, a blog, a poker winnings calculator, and more.</li>
+							<li>I've created multiple websites from scratch for fun.</li>
+							<li>I create and share <mark>reusable components</mark> with other webmaster hobbiests. E.g. A guestbook, a toasts control, and a shortcut manager.</li>
 						</ul>
 					</article>
 					<article aria-labelledby="hDND">
-						<div class="article-heading">
-							<h4 id="hDND" class="article-heading-left">VBA D&D Character Sheet</h4>
-							<span>2020-2023</span>
+						<div class="header">
+							<h4 id="hDND" class="title">VBA D&amp;D Character Sheet</h4>
+							<span class="duration">2020-2023</span>
 						</div>
 						<ul>
 							<li>Using Excel's <mark>Visual Basic for Applications</mark>, I've created a robust character sheet template for the table-top game D&D.</li>
@@ -317,31 +321,31 @@
 				<div>
 					<h3>Other Experience</h3>
 					<article aria-labelledby="hLiteracy">
-						<div class="article-heading">
-							<h4 id="hLiteracy" class="article-heading-left">Tutor at Literacy Network</h4>
-							<span>2021-2022</span>
+						<div class="header">
+							<h4 id="hLiteracy" class="title">Tutor at Literacy Network</h4>
+							<span class="duration">2021-2022</span>
 						</div>
 						<ul>
 							<li>For two semesters, I attended weekly classes with <mark>adult students</mark> to support the lesson-plan and assist individual students.</li>
 							<li>We instructed science and social studies to further students' goals of achieving a High School Equivalency Diploma.</li>
 						</ul>
 					</article>
-					<article aria-labelledby="hNeocities">
-						<div class="article-heading">
-							<h4 id="hNeocities" class="article-heading-left">Hobbyist Web Development Mentor</h4>
-							<span>2023-</span>
+					<article aria-labelledby="hMentor">
+						<div class="header">
+							<h4 id="hMentor" class="title">Hobbyist Web Development Mentor</h4>
+							<span class="duration">2023-</span>
 						</div>
 						<ul>
-							<li>I'm active in <a href="https://neocities.org/">Neocities</a> forums answering questions about web development from mostly young learners.</li>
+							<li>I work with young learners to help them with their nascent web coding projects.</li>
 						</ul>
 					</article>
 				</div>
 				<div>
 					<h3>Education</h3>
 					<article aria-labelledby="hUIUC">
-						<div class="article-heading">
-							<h4 id="hUIUC" class="article-heading-left">UIUC Bachelor of Science in Computer Science with High Honors</h4>
-							<span>2018</span>
+						<div class="header">
+							<h4 id="hUIUC" class="title">UIUC Bachelor of Science in Computer Science with High Honors</h4>
+							<span class="duration">2018</span>
 						</div>
 						<ul>
 							<li>I focused particularly on algorithms, information retrieval, and <mark><a href="https://github.com/GroundedWren/EasyRay/blob/master/EasyRay_Manual.pdf">computer graphics</a></mark>.</li>
@@ -363,7 +367,7 @@
 			</div>
 			<input type="submit" value="Apply">
 		</form>
-		<p>Last updated: <time datetime="2024-03-23T21:29:35.486Z">Mar 23, 2024</time></p>
+		<p>Last updated: <time datetime="2024-07-13T17:15:52.573Z">Jul 13, 2024</time></p>
 	</footer>
 </body>
 </html>
