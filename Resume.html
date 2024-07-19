@@ -7,14 +7,12 @@
 	<title>Resume - Kathryn Aulabaugh</title>
 
 	<script>
-		(function registerNs(ns) {
+		(function GW(ns) {
 			ns.SIZE_CLASS_KEY = "gw-size-class";
 			ns.currentSizeClass = "";
-			ns.onConfirmSizeChange = (event) =>
-			{
+			ns.onConfirmSizeChange = (event) => {
 				const printDiv = document.getElementById("print");
-				if (ns.currentSizeClass)
-				{
+				if (ns.currentSizeClass) {
 					printDiv.classList.remove(ns.currentSizeClass);
 				}
 				
@@ -26,18 +24,15 @@
 			};
 		}) (window.GW = {});
 		
-		window.addEventListener("load", function onLoad(_event)
-		{
+		window.addEventListener("load", function onLoad(_event) {
 			const storedSize = localStorage.getItem(GW.SIZE_CLASS_KEY);
-			if (storedSize)
-			{
+			if (storedSize) {
 				document.getElementById("selSize").value = storedSize;
 				GW.onConfirmSizeChange();
 			}
 		});
 		
-		window.addEventListener("beforeunload", function onBeforeUnload(event)
-		{
+		window.addEventListener("beforeunload", function onBeforeUnload(event) {
 		});
 	</script>
 	

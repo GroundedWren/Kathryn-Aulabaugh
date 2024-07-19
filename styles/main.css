@@ -165,7 +165,45 @@ footer {
 }
 
 summary {
-	padding: 3px;
+	min-height: auto;
+	padding: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 3px;
+
+	&::marker {
+		content: "";
+	}
+	&::before, &::after {
+		content: "";
+		display: inline-block;
+		width: 0.5em;
+		height: 0.5em;
+		transform: rotate(45deg);
+	}
+	&::after {
+		border-top: 2px solid var(--border-color);
+		border-right: 2px solid var(--border-color);
+	}
+	&::before {
+		border-bottom: 2px solid var(--border-color);
+		border-left: 2px solid var(--border-color);
+	}
+}
+details[open] summary {
+	&::after {
+		border-top: none;
+		border-right: none;
+		border-bottom: 2px solid var(--border-color);
+		border-left: 2px solid var(--border-color);
+	}
+	&::before {
+		border-bottom: none;
+		border-left: none;
+		border-top: 2px solid var(--border-color);
+		border-right: 2px solid var(--border-color);
+	}
 }
 
 button, input:is([type="button"], [type="submit"], [type="reset"]), input[type="file"]::file-selector-button, select, summary {
