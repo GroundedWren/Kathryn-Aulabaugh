@@ -237,8 +237,8 @@ input:is([type="text"], [type="password"], [type="number"], [type="email"]), tex
 }
 
 :is(input:is([type="text"], [type="password"], [type="number"], [type="email"]), textarea):invalid {
-	box-shadow: inset 0px 0px 5px 2px var(--selected-color);
-	border-color: var(--selected-color);
+	box-shadow: inset 0px 0px 5px 2px var(--mark-color);
+	border-color: var(--mark-color);
 }
 
 textarea {
