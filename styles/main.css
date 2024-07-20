@@ -236,12 +236,12 @@ button[aria-expanded="true"], button[aria-pressed="true"], details[open] summary
 	cursor: not-allowed;
 }
 
-input:is([type="text"], [type="password"], [type="number"], [type="email"]), textarea {
+input:is([type="text"], [type="password"], [type="number"], [type="email"], [type="date"], [type="time"]), textarea {
 	color: var(--input-text-color);
 	background-color: var(--input-background-color);
 }
 
-:is(input:is([type="text"], [type="password"], [type="number"], [type="email"]), textarea):invalid {
+:is(input:is([type="text"], [type="password"], [type="number"], [type="email"], [type="date"], [type="time"]), textarea):invalid {
 	box-shadow: inset 0px 0px 5px 2px var(--mark-color);
 	border-color: var(--mark-color);
 }
@@ -261,4 +261,16 @@ mark {
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: flex-start;
+}
+label:not(.input-vertical) {
+	&.text-after :is(input, select) {
+		margin-inline-end: 5px;
+	}
+	&:not(.text-after) :is(input, select) {
+		margin-inline-start: 5px;
+	}
+}
+
+label:has(input:checked) {
+	background-color: var(--selected-color);
 }
