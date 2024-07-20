@@ -205,6 +205,11 @@ details[open] summary {
 		border-right: 2px solid var(--border-color);
 	}
 }
+[dir="rtl"] summary {
+	&::before, &::after {
+		transform: rotate(225deg);
+	}
+}
 
 button, input:is([type="button"], [type="submit"], [type="reset"]), input[type="file"]::file-selector-button, select, summary {
 	background-color: var(--button-face-color);
