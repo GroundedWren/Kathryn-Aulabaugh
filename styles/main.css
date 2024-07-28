@@ -252,6 +252,10 @@ input:is([type="text"], [type="password"], [type="number"], [type="email"], [typ
 	box-shadow: inset 0px 0px 5px 2px var(--mark-color);
 	border-color: var(--mark-color);
 }
+select:invalid {
+	box-shadow: inset 0px 0px 5px 2px var(--mark-color);
+	outline: 2px solid var(--mark-color);
+}
 
 textarea {
 	min-height: 15px;
