@@ -182,6 +182,9 @@ summary {
 	&::marker {
 		content: "";
 	}
+	&::-webkit-details-marker {
+		display: none;
+	}
 	&::before, &::after {
 		content: "";
 		display: inline-block;
