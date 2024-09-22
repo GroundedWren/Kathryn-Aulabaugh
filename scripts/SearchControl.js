@@ -1,6 +1,7 @@
 /**
  * @file Script for a site search control
  * @author Vera Konigin vera@groundedwren.com
+ hi
  */
  
 window.GW = window.GW || {};
@@ -43,6 +44,10 @@ window.GW.Controls = window.GW.Controls || {};
 						svg {
 							width: 22px;
 							height: 22px;
+							
+							path {
+								fill: var(--icon-color);
+							}
 						}
 						
 						[popover="auto"] {
