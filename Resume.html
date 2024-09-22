@@ -39,7 +39,7 @@
 	<link rel="stylesheet" href="./styles/variables.css" type="text/css">
 	<link rel="stylesheet" href="./styles/main.css" type="text/css">
 	
-	<script src="./scripts/PersonalizationControl.js"></script>
+	<script src="./scripts/Main.js"></script>
 	
 	<style>
 		#print {
@@ -198,24 +198,12 @@
 	</style>
 </head>
 <body>
-	<header id="mainHeader">
-		<div id="mainHeaderLeft">
-			<a class="hide-until-focus" href="#main">Skip to content</a>
-			<nav class="breadcrumb" aria-label="Breadcrumb">
-				<ol>
-					<li><a href="./index.html" class="full">Kathryn Aulabaugh</a></li>
-					<li><a href="" class="full" aria-current="page">Resume</a></li>
-				</ol>
-			</nav>
-		</div>
-		<div><h1>Resume</h1></div>
-		<div id="mainHeaderRight">
-			<details>
-				<summary>Personalization</summary>
-				<gw-personalization></gw-personalization>
-			</details>
-		</div>
-	</header>
+	<kja-header
+		h1Text="Resume"
+		crumbs="index.html|Kathryn Aulabaugh"
+		curCrumbTxt="Resume"
+		reflowWidth="650px"
+	></kja-header>
 	<div id="print">
 		<main id="main">
 			<section id="resumeHeader">

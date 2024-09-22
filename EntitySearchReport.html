@@ -7,21 +7,19 @@
 	<title>Entity Search</title>
 
 	<script>
-		(function registerNs(ns) {
+		(function GW(ns) {
 		
 		}) (window.GW = {});
 		
 		window.addEventListener("load", function onLoad() {});
 		
-		window.addEventListener("beforeunload", function onBeforeUnload(event)
-		{
-		});
+		window.addEventListener("beforeunload", function onBeforeUnload(event) {});
 	</script>
 	
 	<link rel="stylesheet" href="./styles/variables.css" type="text/css">
 	<link rel="stylesheet" href="./styles/main.css" type="text/css">
 	
-	<script src="./scripts/PersonalizationControl.js"></script>
+	<script src="./scripts/Main.js"></script>
 	
 	<style>
 		header p, header h1 {
@@ -65,30 +63,13 @@
 	</style>
 </head>
 <body>
-	<header id="mainHeader">
-		<div id="mainHeaderLeft">
-			<a class="hide-until-focus" href="#main">Skip to content</a>
-			<nav class="breadcrumb" aria-label="Breadcrumb">
-				<ol>
-					<li><a href="./index.html" class="full">Kathryn Aulabaugh</a></li>
-					<li><a href="" class="full" aria-current="page">Entity Search</a></li>
-				</ol>
-			</nav>
-		</div>
-		<div>
-			<h1>Entity Search Summer 2017 Research Report</h1>
-			<p>
-				Kathryn Aulabaugh<br />
-				Written <time datetime="2017-08-25T05:00:00.000Z">Aug 25, 2017</time>; Transcribed <time datetime="2024-02-04T21:29:35.486Z">Feb 4, 2024</time>
-			</p>
-		</div>
-		<div id="mainHeaderRight">
-			<details>
-				<summary>Personalization</summary>
-				<gw-personalization></gw-personalization>
-			</details>
-		</div>
-	</header>
+	<kja-header
+		h1Text="Entity Search Summer 2017 Research Report"
+		pHTML="Written <time datetime='2017-08-25T05:00:00.000Z'>Aug 25, 2017</time>; Transcribed <time datetime='2024-02-04T21:29:35.486Z'>Feb 4, 2024</time>"
+		crumbs="index.html|Kathryn Aulabaugh"
+		curCrumbTxt="Entity Search"
+		reflowWidth="900px"
+	></kja-header>
 	<nav id="navContent">
 		<h2>Contents</h2>
 		<ol>

@@ -6,7 +6,7 @@
 	<meta name="description" content="A gallery of the little fellers">
 	<title>Cats</title>
 	
-	<script src="./scripts/PersonalizationControl.js"></script>
+	<script src="./scripts/Main.js"></script>
 	<script src="./scripts/GalleryControl.js"></script>
 	<script>
 		GW.Controls.Gallery.Cats = {
@@ -181,27 +181,12 @@
 	</style>
 </head>
 <body>
-	<header id="mainHeader">
-		<div id="mainHeaderLeft">
-			<a class="hide-until-focus" href="#main">Skip to content</a>
-			<nav class="breadcrumb" aria-label="Breadcrumb">
-				<ol>
-					<li><a href="./index.html" class="full">Kathryn Aulabaugh</a></li>
-					<li><a href="" class="full" aria-current="page">Cats</a></li>
-				</ol>
-			</nav>
-		</div>
-		<div>
-			<h1>Cats</h1>
-		</div>
-		<div id="mainHeaderRight">
-			<details>
-				<summary>Personalization</summary>
-				<gw-personalization></gw-personalization>
-			</details>
-		</div>
-	</header>
-	<main id="main">
+	<kja-header
+		h1Text="Cats"
+		crumbs="index.html|Kathryn Aulabaugh"
+		curCrumbTxt="Cats"
+	></kja-header>
+	<main id="mainContent">
 		<gw-gallery
 			name="Cats"
 			minImgWidth="350px"

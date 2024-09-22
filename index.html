@@ -18,17 +18,11 @@
 		});
 	</script>
 	
-	<script src="./scripts/PersonalizationControl.js"></script>
+	<script src="./scripts/Main.js"></script>
 	
 	<link rel="stylesheet" href="./styles/variables.css" type="text/css">
 	<link rel="stylesheet" href="./styles/main.css" type="text/css">
 	<style>
-		@media (max-width: 1150px) {
-			#mainHeader {
-				grid-template-columns: 0fr 1fr 1fr;
-			}
-		}
-		
 		body {
 			display: flex;
 			flex-direction: column;
@@ -101,19 +95,10 @@
 	</style>
 </head>
 <body>
-	<header id="mainHeader">
-		<div id="mainHeaderLeft"></div>
-		<div>
-			<a class="hide-until-focus" href="#main">Skip to content</a>
-			<h1>Kathryn Aulabaugh</h1>
-		</div>
-		<div id="mainHeaderRight">
-			<details>
-				<summary>Personalization</summary>
-				<gw-personalization></gw-personalization>
-			</details>
-		</div>
-	</header>
+	<kja-header
+		h1Text="Kathryn Aulabaugh"
+		reflowWidth="650px"
+	></kja-header>
 	<nav>
 		<ul id="navList">
 			<li><a href="./Resume.html" class="full">Resume</a></li>
@@ -121,7 +106,7 @@
 			<li><a href="./Cats.html" class="full">Cats</a></li>
 		</ul>
 	</nav>
-	<main id="main">
+	<main id="mainContent">
 		<figure id="figKate">
 			<img src="./img/Kate.png" alt="A white woman with long brown hair wearing glasses and a purple sweater smiling at the camera.">
 			<figcaption>Hey, that's me!</figcaption>

@@ -1,9 +1,7 @@
 /**
- * Author: Vera Konigin
- * Site: https://groundedwren.neocities.org
- * Contact: vera@groundedwren.com
- * 
- * File Description: Scripts for user site personalization
+ * @file Scripts for user site personalization
+ * @author Vera Konigin vera@groundedwren.com
+ * https://groundedwren.neocities.org
  */
 
 window.GW = window.GW || {};
@@ -138,6 +136,14 @@ window.GW = window.GW || {};
 					cursor: pointer;
 					min-width: 30px;
 					min-height: 30px;
+				}
+
+				/** https://browserstrangeness.bitbucket.io/css_hacks.html#safari **/
+				@supports (-webkit-hyphens:none) {
+					select {
+						background-color: white;
+						color: black;
+					}
 				}
 
 				button[aria-expanded="true"], button[aria-pressed="true"] {
