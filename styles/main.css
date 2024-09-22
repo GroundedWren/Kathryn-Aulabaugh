@@ -68,7 +68,7 @@ a {
 }
 
 *[tabindex="-1"]:focus {
-	outline-style: dashed;
+	outline-style: dashed !important;
 }
 
 summary, label, input:is([type="checkbox"], [type="radio"]) {
