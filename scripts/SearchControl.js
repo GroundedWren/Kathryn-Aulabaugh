@@ -1,7 +1,6 @@
 /**
  * @file Script for a site search control
  * @author Vera Konigin vera@groundedwren.com
- hi
  */
  
 window.GW = window.GW || {};
