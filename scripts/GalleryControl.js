@@ -250,6 +250,9 @@ window.GW.Controls = window.GW.Controls || {};
 							min-height: auto;
 		
 							border: 3px solid var(--border-color, black);
+							
+							opacity: 0;
+							transition: opacity 0.15s linear;
 						}
 		
 						.page-num {
@@ -270,7 +273,7 @@ window.GW.Controls = window.GW.Controls || {};
 			<figure class="gw-gallery-figure">
 				<img
 					alt="${imageInfo.alt}"
-					style="min-width: ${this.minImgWidth || auto}; max-height: ${this.maxImgHeight || "none"}; min-height: ${this.minImgHeight || "auto"}"
+					style="min-width: ${this.minImgWidth || auto}; max-height: ${this.maxImgHeight || "none"}; min-height: ${this.minImgHeight || "auto"}; "
 				>
 				<figcaption>
 					<span>${imageInfo.title}</span>
@@ -284,7 +287,10 @@ window.GW.Controls = window.GW.Controls || {};
 
 			//element properties
 			this.galleryImg = this.querySelector(`img`);
-			this.galleryImg.onload = this.onImgLoaded;
+			this.galleryImg.onload = () => {
+				setTimeout(() => { this.galleryImg.style.opacity = "1"; }, 10);
+				this.onImgLoaded();
+			};
 			this.galleryImg.src=`${ns[this.name].imageFolder}/${this.image}.${imageInfo.extension}`;
 		}
 	};
