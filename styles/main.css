@@ -178,7 +178,7 @@ button, input:is([type="button"], [type="submit"], [type="reset"]), input[type="
 
 button[aria-expanded="true"], button[aria-pressed="true"], details[open] summary {
 	background-color: var(--selected-color);
-	font-weight: bold;
+	box-shadow: 0px 0px 3px 1px var(--link-color) inset;
 }
 
 :is(button, select, input:is([type="button"], [type="submit"], [type="reset"]))[disabled], input[type="file"][disabled]::file-selector-button {
@@ -217,7 +217,7 @@ mark {
 form {
 	button[type="submit"], button:not([type="reset"], [type="button"]), input[type="submit"] {
 		border-width: 2px;
-		font-weight: bold;
+		box-shadow: 0px 0px 3px 1px var(--link-color) inset;
 	}
 }
 
@@ -235,6 +235,11 @@ label:not(.input-vertical) {
 	}
 	&:not(.text-after) :is(input, select) {
 		margin-inline-start: 5px;
+	}
+	&.wide {
+		> * {
+			flex-grow: 1;
+		}
 	}
 }
 
