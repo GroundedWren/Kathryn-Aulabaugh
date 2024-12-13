@@ -217,7 +217,7 @@ mark {
 form {
 	button[type="submit"], button:not([type="reset"], [type="button"]), input[type="submit"] {
 		border-width: 2px;
-		box-shadow: 0px 0px 3px 1px var(--link-color) inset;
+		font-weight: bold;
 	}
 }
 
