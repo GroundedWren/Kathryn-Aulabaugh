@@ -98,15 +98,21 @@ window.KJA = window.KJA || {};
 						}
 					</style>`);
 					
-					const personalizationScript = document.createElement("script");
-					personalizationScript.type = "text/javascript";
-					personalizationScript.src = "https://kathryn-aulabaugh.com/scripts/PersonalizationControl.js";
-					document.head.appendChild(personalizationScript);
+					if(!GW.Controls?.PersonalizationEl) {
+						const personalizationScript = document.createElement("script");
+						personalizationScript.type = "text/javascript";
+						personalizationScript.src = "https://kathryn-aulabaugh.com/scripts/PersonalizationControl.js";
+						document.head.appendChild(personalizationScript);
+						GW.Controls?.Veil?.addDefer("GW.Controls.PersonalizationEl");
+					}
 					
-					const searchScript = document.createElement("script");
-					searchScript.type = "text/javascript";
-					searchScript.src = "https://kathryn-aulabaugh.com/scripts/SearchControl.js";
-					document.head.appendChild(searchScript);
+					if(!GW.Controls?.SearchEl) {
+						const searchScript = document.createElement("script");
+						searchScript.type = "text/javascript";
+						searchScript.src = "https://kathryn-aulabaugh.com/scripts/SearchControl.js";
+						document.head.appendChild(searchScript);
+						GW.Controls?.Veil?.addDefer("GW.Controls.Search");
+					}
 				}
 			}
 			

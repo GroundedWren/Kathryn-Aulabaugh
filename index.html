@@ -5,11 +5,64 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Kathryn Aulabaugh's Website">
 	<title>Kathryn Aulabaugh</title>
-
+	
+	<script>
+		/**
+		 * A script for a loading veil
+		 * @author Vera Konigin vera@groundedwren.com
+		 * https://groundedwren.neocities.org
+		 */
+		window.GW = window.GW || {};
+		window.GW.Controls = window.GW.Controls || {};
+		(function Veil(ns) {
+			ns.DeferKeys = {"DOMContentLoaded": true};
+			
+			/**
+			 * Defers the lowering of the veil until a key is cleared
+			 * @param {string} key The defer key to keep the veil up
+			 */
+			ns.addDefer = function addDefer(key) {
+				ns.DeferKeys[key] = true;
+			}
+			
+			/**
+			 * Marks a defer key as complete and clears the veil if no remain
+			 * @param {string} key The key to clear
+			 */
+			ns.clearDefer = function clearDefer(key) {
+				delete ns.DeferKeys[key];
+				if(Object.keys(ns.DeferKeys).length === 0) {
+					setTimeout(() => document.getElementById("styGwLoad")?.remove(), 0);
+				}
+			}
+			
+			document.head.insertAdjacentHTML("beforeend", `
+				<style id="styGwLoad">
+					body {
+						opacity: 0;
+					}
+					html {
+						width: 100vw;
+						height: 100vh;
+						background-color: var(--veil-light-color, #E3E3E3) !important;
+					}
+					@media(prefers-color-scheme: dark) {
+						html {
+							background-color: var(--veil-dark-color, #242424) !important;
+						}
+					}
+				</style>
+			`);
+			window.addEventListener("DOMContentLoaded", function onDOMContentLoadedVeil() {
+				ns.clearDefer("DOMContentLoaded");
+			});
+		}) (window.GW.Controls.Veil = window.GW.Controls.Veil || {});
+	</script>
+	
 	<script>
 		(function GW(ns) {
 		
-		}) (window.GW = {});
+		}) (window.GW = window.GW || {});
 		
 		window.addEventListener("load", function onLoad() {});
 		
@@ -108,7 +161,7 @@
 	</nav>
 	<main id="mainContent">
 		<figure id="figKate">
-			<img src="./img/Kate.png" alt="A white woman with long brown hair wearing glasses and a purple sweater smiling at the camera.">
+			<img loading="lazy" src="./img/Kate.png" alt="A white woman with long brown hair wearing glasses and a purple sweater smiling at the camera.">
 			<figcaption>Hey, that's me!</figcaption>
 		</figure>
 		<article aria-labelledby="hAbout">
@@ -124,7 +177,7 @@
 	<footer>
 		<p>
 			Created <time datetime="2024-02-04T21:29:35.486Z">Feb 4, 2024</time> (with Notepad++)<br />
-			Last updated <time datetime="2024-10-01T18:52:47.601Z">October 1, 2024</time><br />
+			Last updated <time datetime="2024-12-21T23:33:07.383Z">December 21, 2024</time><br />
 			<a href="https://github.com/GroundedWren/Kathryn-Aulabaugh">Repository</a>
 		</p>
 		<p>Contact: <a href="mailto:kathryn.aulabaugh@gmail.com">kathryn.aulabaugh@gmail.com</a></p>

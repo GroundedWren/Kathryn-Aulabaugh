@@ -5,6 +5,60 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Resume of Kathryn Aulabaugh">
 	<title>Resume - Kathryn Aulabaugh</title>
+	
+	<script>
+		/**
+		 * A script for a loading veil
+		 * @author Vera Konigin vera@groundedwren.com
+		 * https://groundedwren.neocities.org
+		 */
+		window.GW = window.GW || {};
+		window.GW.Controls = window.GW.Controls || {};
+		(function Veil(ns) {
+			ns.DeferKeys = {"DOMContentLoaded": true};
+			
+			/**
+			 * Defers the lowering of the veil until a key is cleared
+			 * @param {string} key The defer key to keep the veil up
+			 */
+			ns.addDefer = function addDefer(key) {
+				ns.DeferKeys[key] = true;
+			}
+			
+			/**
+			 * Marks a defer key as complete and clears the veil if no remain
+			 * @param {string} key The key to clear
+			 */
+			ns.clearDefer = function clearDefer(key) {
+				delete ns.DeferKeys[key];
+				if(Object.keys(ns.DeferKeys).length === 0) {
+					setTimeout(() => document.getElementById("styGwLoad")?.remove(), 0);
+				}
+			}
+			
+			document.head.insertAdjacentHTML("beforeend", `
+				<style id="styGwLoad">
+					body {
+						opacity: 0;
+					}
+					html {
+						width: 100vw;
+						height: 100vh;
+						background-color: var(--veil-light-color, #E3E3E3) !important;
+					}
+					@media(prefers-color-scheme: dark) {
+						html {
+							background-color: var(--veil-dark-color, #242424) !important;
+						}
+					}
+				</style>
+			`);
+			window.addEventListener("DOMContentLoaded", function onDOMContentLoadedVeil() {
+				ns.clearDefer("DOMContentLoaded");
+			});
+		}) (window.GW.Controls.Veil = window.GW.Controls.Veil || {});
+	</script>
+	
 
 	<script>
 		(function GW(ns) {
@@ -22,7 +76,7 @@
 				
 				event?.preventDefault();
 			};
-		}) (window.GW = {});
+		}) (window.GW = window.GW || {});
 		
 		window.addEventListener("load", function onLoad(_event) {
 			const storedSize = localStorage.getItem(GW.SIZE_CLASS_KEY);
@@ -32,8 +86,7 @@
 			}
 		});
 		
-		window.addEventListener("beforeunload", function onBeforeUnload(event) {
-		});
+		window.addEventListener("beforeunload", function onBeforeUnload(event) {});
 	</script>
 	
 	<link rel="stylesheet" href="./styles/variables.css" type="text/css">

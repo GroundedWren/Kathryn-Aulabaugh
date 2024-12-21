@@ -6,9 +6,71 @@
 	<meta name="description" content="A gallery of the little fellers">
 	<title>Cats</title>
 	
+	<script>
+		/**
+		 * A script for a loading veil
+		 * @author Vera Konigin vera@groundedwren.com
+		 * https://groundedwren.neocities.org
+		 */
+		window.GW = window.GW || {};
+		window.GW.Controls = window.GW.Controls || {};
+		(function Veil(ns) {
+			ns.DeferKeys = {"DOMContentLoaded": true};
+			
+			/**
+			 * Defers the lowering of the veil until a key is cleared
+			 * @param {string} key The defer key to keep the veil up
+			 */
+			ns.addDefer = function addDefer(key) {
+				ns.DeferKeys[key] = true;
+			}
+			
+			/**
+			 * Marks a defer key as complete and clears the veil if no remain
+			 * @param {string} key The key to clear
+			 */
+			ns.clearDefer = function clearDefer(key) {
+				delete ns.DeferKeys[key];
+				if(Object.keys(ns.DeferKeys).length === 0) {
+					setTimeout(() => document.getElementById("styGwLoad")?.remove(), 0);
+				}
+			}
+			
+			document.head.insertAdjacentHTML("beforeend", `
+				<style id="styGwLoad">
+					body {
+						opacity: 0;
+					}
+					html {
+						width: 100vw;
+						height: 100vh;
+						background-color: var(--veil-light-color, #E3E3E3) !important;
+					}
+					@media(prefers-color-scheme: dark) {
+						html {
+							background-color: var(--veil-dark-color, #242424) !important;
+						}
+					}
+				</style>
+			`);
+			window.addEventListener("DOMContentLoaded", function onDOMContentLoadedVeil() {
+				ns.clearDefer("DOMContentLoaded");
+			});
+		}) (window.GW.Controls.Veil = window.GW.Controls.Veil || {});
+	</script>
+	
+	
 	<script src="./scripts/Main.js"></script>
 	<script src="./scripts/GalleryControl.js"></script>
+	
+	<link rel="stylesheet" href="./styles/variables.css" type="text/css">
+	<link rel="stylesheet" href="./styles/main.css" type="text/css">
+	
 	<script>
+		window.GW = window.GW || {};
+		GW.Controls = GW.Controls || {};
+		GW.Controls.Gallery = GW.Controls.Gallery || {};
+		GW.Controls.Gallery.Data = GW.Controls.Gallery.Data || {};
 		GW.Controls.Gallery.Data.Cats = {
 			ImageList: [
 				"2024-09-08 S_E",
@@ -101,9 +163,6 @@
 			}
 		};
 	</script>
-	
-	<link rel="stylesheet" href="./styles/variables.css" type="text/css">
-	<link rel="stylesheet" href="./styles/main.css" type="text/css">
 	<style>
 		body {
 			display: grid;
@@ -198,7 +257,7 @@
 			<h2 id="hAvi">Avitus <q>Avi</q> Rix Aulabaugh</h2>
 			<aside class="cat-photo">
 				<figure>
-					<img src="./img/cats/Avi_Profile.jpg" alt="Avi perches atop the back of a chair.">
+					<img loading="lazy" src="./img/cats/Avi_Profile.jpg" alt="Avi perches atop the back of a chair.">
 					<figcaption>Avi</figcaption>
 				</figure>
 			</aside>
@@ -209,7 +268,7 @@
 			<h2 id="hShadow">Shadow Julian Bruner</h2>
 			<aside class="cat-photo">
 				<figure>
-					<img src="./img/cats/Shadow_Profile.jpg" alt="Shadow lounges with with a lot of swagger on a couch.">
+					<img loading="lazy" src="./img/cats/Shadow_Profile.jpg" alt="Shadow lounges with with a lot of swagger on a couch.">
 					<figcaption>Shadow</figcaption>
 				</figure>
 			</aside>
@@ -220,7 +279,7 @@
 			<h2 id="hEcho">Echo Jadzia Bruner</h2>
 			<aside class="cat-photo">
 				<figure>
-					<img src="./img/cats/Echo_Profile.jpg" alt="Echo sits on a couch while a human hand scratches her neck.">
+					<img loading="lazy" src="./img/cats/Echo_Profile.jpg" alt="Echo sits on a couch while a human hand scratches her neck.">
 					<figcaption>Echo</figcaption>
 				</figure>
 			</aside>

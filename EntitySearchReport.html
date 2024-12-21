@@ -5,21 +5,75 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Research report for Entity Search">
 	<title>Entity Search</title>
-
+	
 	<script>
-		(function GW(ns) {
-		
-		}) (window.GW = {});
-		
-		window.addEventListener("load", function onLoad() {});
-		
-		window.addEventListener("beforeunload", function onBeforeUnload(event) {});
+		/**
+		 * A script for a loading veil
+		 * @author Vera Konigin vera@groundedwren.com
+		 * https://groundedwren.neocities.org
+		 */
+		window.GW = window.GW || {};
+		window.GW.Controls = window.GW.Controls || {};
+		(function Veil(ns) {
+			ns.DeferKeys = {"DOMContentLoaded": true};
+			
+			/**
+			 * Defers the lowering of the veil until a key is cleared
+			 * @param {string} key The defer key to keep the veil up
+			 */
+			ns.addDefer = function addDefer(key) {
+				ns.DeferKeys[key] = true;
+			}
+			
+			/**
+			 * Marks a defer key as complete and clears the veil if no remain
+			 * @param {string} key The key to clear
+			 */
+			ns.clearDefer = function clearDefer(key) {
+				delete ns.DeferKeys[key];
+				if(Object.keys(ns.DeferKeys).length === 0) {
+					setTimeout(() => document.getElementById("styGwLoad")?.remove(), 0);
+				}
+			}
+			
+			document.head.insertAdjacentHTML("beforeend", `
+				<style id="styGwLoad">
+					body {
+						opacity: 0;
+					}
+					html {
+						width: 100vw;
+						height: 100vh;
+						background-color: var(--veil-light-color, #E3E3E3) !important;
+					}
+					@media(prefers-color-scheme: dark) {
+						html {
+							background-color: var(--veil-dark-color, #242424) !important;
+						}
+					}
+				</style>
+			`);
+			window.addEventListener("DOMContentLoaded", function onDOMContentLoadedVeil() {
+				ns.clearDefer("DOMContentLoaded");
+			});
+		}) (window.GW.Controls.Veil = window.GW.Controls.Veil || {});
 	</script>
+	
 	
 	<link rel="stylesheet" href="./styles/variables.css" type="text/css">
 	<link rel="stylesheet" href="./styles/main.css" type="text/css">
 	
 	<script src="./scripts/Main.js"></script>
+	
+	<script>
+		(function GW(ns) {
+		
+		}) (window.GW = window.GW || {});
+		
+		window.addEventListener("load", function onLoad() {});
+		
+		window.addEventListener("beforeunload", function onBeforeUnload(event) {});
+	</script>
 	
 	<style>
 		header p, header h1 {
