@@ -230,10 +230,13 @@ form {
 label:not(.input-vertical) {
 	display: inline-flex;
 	align-items: center;
-	&.text-after :is(input, select) {
-		margin-inline-end: 5px;
+	&:is(.text-after, :has(input:is([type="checkbox"], [type="radio"]))) {
+		padding-inline-end: 2px;
+		:is(input, select) {
+			margin-inline-end: 5px;
+		}
 	}
-	&:not(.text-after) :is(input, select) {
+	&:not(:is(.text-after, :has(input:is([type="checkbox"], [type="radio"])))) :is(input, select) {
 		margin-inline-start: 5px;
 	}
 	&.wide {
