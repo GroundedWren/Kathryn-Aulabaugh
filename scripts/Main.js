@@ -32,6 +32,12 @@ window.KJA = window.KJA || {};
 								gap: 10px;
 								padding-block-end: 10px;
 								border-block-end: 1px solid var(--border-color);
+
+								a[href="#mainContent"]:focus-within {
+									position: absolute !important;
+									top: 4px;
+									left: 4px;
+								}
 								
 								h1 {
 									margin-block: 0px;
@@ -153,7 +159,7 @@ window.KJA = window.KJA || {};
 				this.innerHTML = `
 				<header id=${this.getId("header")}>
 					<div class="left">
-						<a class="hide-until-focus" href="#mainContent">Skip to content</a>
+						<a class="hide-until-focus full" href="#mainContent">Skip to content</a>
 						<gw-search dataKey="Site"></gw-search>
 						${this.hasAttribute("crumbs")
 							? `<nav aria-label="Breadcrumb" class="breadcrumb">
