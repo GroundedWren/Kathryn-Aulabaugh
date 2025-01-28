@@ -76,6 +76,15 @@
 	<link rel="stylesheet" href="./styles/variables.css" type="text/css">
 	<link rel="stylesheet" href="./styles/main.css" type="text/css">
 	<style>
+		html {
+			&.theme-light cite.theme.dark {
+				display: none;
+			}
+			&.theme-dark cite.theme.light {
+				display: none;
+			}
+		}
+
 		body {
 			display: flex;
 			flex-direction: column;
@@ -91,7 +100,13 @@
 		}
 		
 		nav {
-			margin: 10px;
+			margin-block: 10px;
+			width: fit-content;
+			margin-inline: auto;
+			padding: 4px;
+			border-radius: 20px;
+			background-color: var(--background-color);
+			padding-block: 3px;
 		}
 		
 		#navList {
@@ -107,7 +122,6 @@
 			li {
 				display: block;
 				min-height: 30px;
-				margin-bottom: 5px;
 			}
 			
 			a {
@@ -119,6 +133,7 @@
 		#figKate {
 			width: 300px;
 			margin: auto;
+			padding-block-end: 5px;
 			
 			img {
 				width: 100%;
@@ -128,12 +143,16 @@
 		
 		figcaption {
 			text-align: center;
+			background-color: color-mix(in oklab, var(--background-color), transparent 20%);
+			border-radius: 20px;
 		}
 		
 		main article {
 			border: 1px solid var(--border-color);
 			padding: 5px;
 			margin-top: 5px;
+
+			background-color: var(--background-color);
 			
 			h2 {
 				margin-left: -5px;
@@ -143,6 +162,33 @@
 				padding-right: 5px;
 				border-bottom: 1px solid var(--border-color);
 				background-color: var(--accent-color);
+			}
+		}
+
+		footer {
+			display: grid;
+			justify-content: space-around;
+			gap: 10px;
+			grid-template-areas: 
+				"info cite"
+				"contact contact";
+			article {
+				grid-area: "info"
+			}
+			aside {
+				grid-area: cite;
+				text-align: right;
+			}
+			address {
+				grid-area: contact;
+				justify-self: center;
+			}
+
+			@media(max-width: 500px) {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				text-align: center;
 			}
 		}
 	</style>
@@ -155,6 +201,7 @@
 	<nav>
 		<ul id="navList">
 			<li><a href="./Resume.html" class="full">Resume</a></li>
+			<li><a href="https://github.com/GroundedWren" target="_blank" class="full">GitHub</a></li>
 			<li><a href="./EntitySearchReport.html" class="full">Entity Search Report</a></li>
 			<li><a href="./Cats.html" class="full">Cats</a></li>
 		</ul>
@@ -175,12 +222,17 @@
 		</article>
 	</main>
 	<footer>
-		<p>
+		<article>
 			Created <time datetime="2024-02-04T21:29:35.486Z">Feb 4, 2024</time> (with Notepad++)<br />
-			Last updated <time datetime="2025-01-16T02:27:15.102Z">January 15, 2025</time><br />
+			Last updated <time datetime="2025-01-28T05:12:44.833Z">January 27, 2025</time><br />
 			<a href="https://github.com/GroundedWren/Kathryn-Aulabaugh">Repository</a>
-		</p>
-		<p>Contact: <a href="mailto:kathryn.aulabaugh@gmail.com">kathryn.aulabaugh@gmail.com</a></p>
+		</article>
+		<aside>
+			<span>Background image: </span>
+			<cite class="theme light"><a href="https://commons.wikimedia.org/wiki/File:500px_photo_(262308089).jpeg" target="_blank">Нина северянка, CC0, via Wikimedia Commons</a></cite>
+			<cite class="theme dark"><a href="https://webbtelescope.org/contents/media/images/2022/031/01G77PKB8NKR7S8Z6HBXMYATGJ" target="_blank">NASA, ESA, CSA, STScI</a></cite>
+		</aside>
+		<address>Contact: <a href="mailto:kathryn.aulabaugh@gmail.com">kathryn.aulabaugh@gmail.com</a></address>
 	</footer>
 </body>
 </html>

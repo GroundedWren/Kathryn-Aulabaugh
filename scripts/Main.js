@@ -31,7 +31,7 @@ window.KJA = window.KJA || {};
 								text-align: center;
 								gap: 10px;
 								padding-block-end: 10px;
-								border-block-end: 1px solid var(--border-color);
+								border-block-end: 1px solid color-mix(in oklab, var(--border-color), transparent 80%);
 
 								a[href="#mainContent"]:focus-within {
 									position: absolute !important;
@@ -59,8 +59,9 @@ window.KJA = window.KJA || {};
 								flex-direction: row;
 								flex-wrap: wrap;
 								gap: 5px;
-								padding-inline: 10px;
-								padding-block-start: 10px;
+								padding: 5px;
+								border-radius: 20px;
+								background-color: var(--background-color);
 								
 								ol {
 									margin: 0;
@@ -69,7 +70,6 @@ window.KJA = window.KJA || {};
 									
 									li {
 										display: inline-block;
-										margin-block-end: 4px;
 										
 										+ li::before {
 											display: inline-block;
