@@ -67,6 +67,9 @@ window.KJA = window.KJA || {};
 									margin: 0;
 									padding: 0;
 									list-style: none;
+									display: flex;
+									flex-direction: row;
+									flex-wrap: wrap;
 									
 									li {
 										display: inline-block;

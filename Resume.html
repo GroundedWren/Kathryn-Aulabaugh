@@ -100,8 +100,7 @@
 			padding: 15px;
 			box-shadow: 0px 0px 3px 0px var(--text-color);
 			margin: 5px;
-			margin-left: auto;
-			margin-right: auto;
+			margin-inline: auto;
 			
 			max-width: 1100px;
 			height: auto;
@@ -214,11 +213,11 @@
 		}
 		
 		main article {
-			border-left: 2px solid;
-			padding-left:2px;
+			border-inline-start: 2px solid var(--background-color-2);
+			padding-inline-start:2px;
 			
 			+ article {
-				margin-top: 5px;
+				margin-block-start: 5px;
 			}
 			
 			.header {
@@ -227,15 +226,17 @@
 				align-items: center;
 				justify-content: space-between;
 				background-color: var(--background-color-2);
-				padding-right: 5px;
-				margin-bottom: 2px;
+				padding-inline-end: 5px;
+				margin-block-end: 2px;
+				margin-inline: -2px;
 				
 				.title {
 					background-color: var(--background-color);
 					border-radius: 0 10px 0 0;
-					padding-right: 5px;
-					margin-top: 3px;
-					margin-right: 5px;
+					padding-inline-end: 5px;
+					padding-inline-start: 2px;
+					margin-block-start: 3px;
+					margin-inline-end: 5px;
 				}
 				
 				.duration {
@@ -275,39 +276,44 @@
 					<article aria-labelledby="hSdEpic">
 						<div class="header">
 							<h4 id="hSdEpic" class="title">Software Developer at Epic Systems Corporation</h4>
-							<span class="duration">Intern 2015; Full-time 2018-</span>
+							<span class="duration">Intern 2015; Full-time 2018-Now</span>
 						</div>
 						<h5>Automatically Filing Medical Device Data</h5>
 						<ul>
-							<li>I created the <mark>front-end</mark> interface for a project to bring medical device data automatically into patients' charts.</li>
-							<li>I also implemented modified <mark>decision support</mark> based on this data.</li>
-							<li>I enhanced and measured database data retrieval <mark>performance</mark>.</li>
+							<li>I created the <mark>front-end</mark> and usage auditing for a project to bring medical device data automatically into patients' charts.</li>
+							<li>I implemented a framework for <mark>decision support</mark> based on this data.</li>
+							<li>I measured and enhanced data retrieval <mark>performance</mark> for this functionality in a non-relational database.</li>
 						</ul>
 						<h5>Nursing Documentation with a Web Framework</h5>
 						<ul>
-							<li>I migrated several components of clinical documentation to a web framework.</li>
-							<li>I designed a <mark>team-wide framework</mark> for client event sequencing.</li>
-							<li>I am a point of contact for several other teams interfacing with my team's components.</li>
+							<li>I migrated several components of clinical documentation to an ASP.NET and React framework.</li>
+							<li>I designed a <mark>team-wide framework</mark> for complex client event sequencing.</li>
+							<li>I conducted <mark>on-site research</mark> into user needs for new workflows.</li>
 						</ul>
 						<h5>Platform Accessibility Representative</h5>
 						<ul>
 							<li>I conduct <mark>accessibility evaluations</mark> on our team's projects and sign off on them.</li>
-							<li>I evaluated and documented accessibility deficiencies across several web interfaces for configuring various clinical administration records, then worked closely with a user experience specialist to address them.</li>
+							<li>I've optimized numerous pre-existing interfaces for accessibility and advise on designs for new functionality in close collaboration with UX experts.</li>
+							<li>I lead testing and development efforts for supporting new platforms, modalities, and assistive technologies.</li>
 						</ul>
-						<h5>Patient Satisfaction Rounding</h5>
+						<h5>Data Model Design</h5>
 						<ul>
-							<li>I conducted <mark>on-site research</mark> into user needs for a new workflow.</li>
 							<li>I designed and implemented a mechanism by which survey data could be excluded from the legal medical record.</li>
+							<li>I developed new record structures to make clinician-created efficiency tools more generalizable.</li>
 						</ul>
 						<h5>Critical Fixes</h5>
 						<ul>
 							<li>I complete numerous fixes critical for <mark>patient safety</mark> and performance on short timelines.</li>
+							<li>I've identified and escalated numerous issues before leading the charge on mitigation and resolution.</li>
 						</ul>
 						<h5>R&D Team Lead, Mentoring, and Coaching</h5>
 						<ul>
 							<li><mark>I designed multiple intern projects</mark> for nursing documentation review, then guided interns through them.</li>
-							<li>I'm a <mark>design coach</mark> for my team to guide new hires through their first technical writing assignments.</li>
-							<li>I <mark>managed</mark> three developers.</li>
+							<li>I <mark>managed</mark> three developers, mentor many both officially and ad-hoc, and help teach technical design skills.</li>
+						</ul>
+						<h5>Workload Balancing and Triage</h5>
+						<ul>
+							<li>I manage all code review assignments on my team using a web application I built from scratch in my spare time.</li>
 						</ul>
 					</article>
 					<article aria-labelledby="hForward">
@@ -316,8 +322,8 @@
 							<span class="duration">2017</span>
 						</div>
 						<ul>
-							<li>I worked in a small team of undergraduates to construct a prototype entity-aware <mark>information retrieval</mark> system: <a href="./EntitySearchReport.html">Entity Search</a>.</li>
-							<li>I extended Apache Lucene to incorporate various <mark>Named Entity Recognition</mark> techniques into its indexing process.</li>
+							<li>I worked in a small team to construct an entity-aware <mark>information retrieval</mark> system: <a href="./EntitySearchReport.html">Entity Search</a>.</li>
+							<li>I extended Apache Lucene (Java) to incorporate various <mark>Named Entity Recognition</mark> techniques into its indexing process.</li>
 						</ul>
 					</article>
 				</div>
@@ -326,28 +332,21 @@
 					<article aria-labelledby="hGames">
 						<div class="header">
 							<h4 id="hGames" class="title">Accessible Web Games</h4>
-							<span class="duration">2024</span>
+							<span class="duration">2024-Now</span>
 						</div>
 						<ul>
 							<li>I've created several games in JavaScript, including a <a href="https://minesweeper.groundedwren.com/">Minesweeper clone</a> and a correspondence-style <a href="https://chess.groundedwren.com/">chess tracker</a>.</li>
-						</ul>
-					</article>
-					<article aria-labelledby="hTextAdventure">
-						<div class="header">
-							<h4 id="hTextAdventure" class="title"><a href="https://lyrics.groundedwren.com">Lyric Analyzer</a></h4>
-							<span class="duration">2024</span>
-						</div>
-						<ul>
-							<li>I created an accessible tool to review and search for lyrical trends across musicians' discographies.</li>
+							<li>I created a <a href="https://lyrics.groundedwren.com">tool to review and search for lyrical trends</a> across musicians' discographies.</li>
 						</ul>
 					</article>
 					<article aria-labelledby="hGroundedWren">
 						<div class="header">
 							<h4 id="hGroundedWren" class="title"><a href="https://groundedwren.neocities.org/">Front-End Tools and Mentoring</a></h4>
-							<span class="duration">2022-</span>
+							<span class="duration">2022-Now</span>
 						</div>
 						<ul>
-							<li>I've created multiple websites from scratch for fun.</li>
+							<li>I've created numerous websites from scratch for fun.</li>
+							<li>I created a <mark>browser extension</mark> for customizing sites with <a href="https://chromewebstore.google.com/detail/user-styles-scripts/ghdedggfpdileobhfbcgoonpmclignae">user styles and scripts</a>.</li>
 							<li>I create and share <mark>reusable components</mark> with other webmaster hobbiests. E.g. a shortcut manager.</li>
 						</ul>
 					</article>
@@ -402,7 +401,7 @@
 			</div>
 			<input type="submit" value="Apply">
 		</form>
-		<p>Last updated: <time datetime="2024-09-22T01:31:21.707Z">Sep 21, 2024</time></p>
+		<p>Last updated: <time datetime="2025-01-30T20:30:25.855Z">Jan 30, 2025</time></p>
 	</footer>
 </body>
 </html>
