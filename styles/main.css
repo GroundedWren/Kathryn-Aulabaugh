@@ -20,12 +20,13 @@ html {
 
 	background-size: cover;
 	background-attachment: fixed;
-
-	&.theme-dark {
-		background-image: url(../img/Cosmic_Cliffs.png);
-	}
-	&.theme-light {
-		background-image: url(../img/Lilacs.png);
+	@media not print {
+		&.theme-dark {
+			background-image: url(../img/Cosmic_Cliffs.png);
+		}
+		&.theme-light {
+			background-image: url(../img/Lilacs.png);
+		}
 	}
 }
 body {
