@@ -28,6 +28,11 @@ html {
 			background-image: url(../img/Lilacs.png);
 		}
 	}
+	@media print {
+		::-webkit-scrollbar {
+			display: none;
+		}
+	}
 }
 body {
 	min-height: 100vh;
