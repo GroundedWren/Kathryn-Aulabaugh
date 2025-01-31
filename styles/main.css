@@ -252,13 +252,13 @@ form {
 label:not(.input-vertical) {
 	display: inline-flex;
 	align-items: center;
-	&:is(.text-after, :has(input:is([type="checkbox"], [type="radio"]))) {
+	&:is(.text-after, :has(input:is([type="checkbox"], [type="radio"]), [role="switch"])) {
 		padding-inline-end: 2px;
-		:is(input, select) {
+		:is(input, select, [role="switch"]) {
 			margin-inline-end: 5px;
 		}
 	}
-	&:not(:is(.text-after, :has(input:is([type="checkbox"], [type="radio"])))) :is(input, select) {
+	&:not(:is(.text-after, :has(input:is([type="checkbox"], [type="radio"]), [role="switch"]))) :is(input, select) {
 		margin-inline-start: 5px;
 	}
 	&.wide {

@@ -93,6 +93,7 @@
 	<link rel="stylesheet" href="./styles/main.css" type="text/css">
 	
 	<script src="./scripts/Main.js"></script>
+	<script src="./scripts/SwitchControl.js"></script>
 	
 	<style>
 		#print {
@@ -134,15 +135,32 @@
 		
 		footer {
 			display: flex;
+			flex-wrap: wrap;
 			align-items: center;
 			justify-content: space-around;
 			gap: 15px;
 			margin: auto;
+
+			gw-switch {
+				min-width: 20px;
+			}
+
+			p {
+				background-color: var(--background-color);
+				padding: 3px;
+				border-radius: 20px;
+			}
 		}
 		#formSize {
 			display: flex;
 			gap: 5px;
 			align-items: flex-end;
+		}
+
+		body:not(:has(#cbxHighlights:checked)) {
+			mark {
+				background-color: transparent !important;
+			}
 		}
 		
 		h1, h3, h3 {
@@ -402,6 +420,7 @@
 			</div>
 			<input type="submit" value="Apply">
 		</form>
+		<label><gw-switch><input type="checkbox" id="cbxHighlights" checked></gw-switch> Show highlights</label>
 		<p>Last updated: <time datetime="2025-01-30T20:30:25.855Z">Jan 30, 2025</time></p>
 	</footer>
 </body>
