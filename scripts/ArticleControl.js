@@ -60,7 +60,7 @@ window.GW = window.GW || {};
 						gap: 4px;
 
 						h1, h2, h3, h4, h5, h6 {
-							margin-block-start: 0;
+							margin-block: 0;
 							text-align: center;
 						}
 						svg {
