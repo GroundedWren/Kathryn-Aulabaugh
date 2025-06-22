@@ -90,10 +90,10 @@ window.GW.Controls = window.GW.Controls || {};
 						@container(max-width: ${this.ReflowWidth || "0px"}) {
 							.gallery {
 								grid-template-columns: 1fr 1fr;
-								grid-template-rows: 1fr auto;
+								grid-template-rows: auto 1fr;
 							}
 							.figure-container {
-								grid-row: 1;
+								grid-row: 2;
 								grid-column: 1 / -1;
 							}
 						}
