@@ -131,10 +131,6 @@ img {
 summary {
 	min-height: auto;
 	padding: 5px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 3px;
 
 	&::marker {
 		content: "";
@@ -142,6 +138,13 @@ summary {
 	&::-webkit-details-marker {
 		display: none;
 	}
+}
+summary, button[aria-expanded] {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 3px;
+
 	&::before, &::after {
 		content: "";
 		display: inline-block;
@@ -158,7 +161,7 @@ summary {
 		border-left: 2px solid var(--border-color);
 	}
 }
-details[open] summary {
+details[open] summary, button[aria-expanded="true"] {
 	&::after {
 		border-top: none;
 		border-right: none;
@@ -172,7 +175,7 @@ details[open] summary {
 		border-right: 2px solid var(--border-color);
 	}
 }
-[dir="rtl"] summary {
+[dir="rtl"] :is(summary, button[aria-expanded]) {
 	&::before, &::after {
 		transform: rotate(225deg);
 	}
@@ -206,7 +209,7 @@ button, input:is([type="button"], [type="submit"], [type="reset"]), input[type="
 	}
 }
 
-button:is([aria-expanded], [aria-pressed]) {
+button[aria-pressed] {
 	display: flex;
 	flex-direction: row;
 	gap: 3px;
@@ -222,7 +225,7 @@ button:is([aria-expanded], [aria-pressed]) {
 		border: 1px solid var(--border-color);
 	}
 
-	&:is([aria-expanded="true"], [aria-pressed="true"]) {
+	&[aria-pressed="true"] {
 		&::before {
 			background-color: var(--border-color);
 		}
