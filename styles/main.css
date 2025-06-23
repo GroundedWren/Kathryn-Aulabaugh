@@ -123,6 +123,11 @@ img {
 	display: block;
 }
 
+:popover-open, dialog {
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+
 summary {
 	min-height: auto;
 	padding: 5px;
@@ -173,21 +178,68 @@ details[open] summary {
 	}
 }
 
-:popover-open, dialog {
-	color: var(--text-color);
-	background-color: var(--background-color);
-}
-
 button, input:is([type="button"], [type="submit"], [type="reset"]), input[type="file"]::file-selector-button, select, summary {
+	--border-start-color: color-mix(in oklab, var(--link-color), #FFFFFF 30%);
+	--border-end-color: color-mix(in oklab, var(--link-color), #000000 20%);
+	
 	background-color: var(--button-face-color);
 	color: var(--button-text-color);
-	border: 1px solid var(--link-color);
+
+	border: 2.5px solid;
+	border-block-start-color: var(--border-start-color);
+	border-inline-start-color: var(--border-start-color);
+	border-block-end-color: var(--border-end-color);
+	border-inline-end-color: var(--border-end-color);
 	cursor: pointer;
 	min-width: 30px;
 	min-height: 30px;
 	user-select: none;
 	-webkit-user-select: none;
+
+	&:hover {
+		background-color: color-mix(in oklab, var(--button-face-color), var(--selected-color) 35%);
+	}
+	&:active, &:open {
+		background-color: color-mix(in oklab, var(--button-face-color), var(--selected-color) 65%);
+		--border-start-color: color-mix(in oklab, var(--link-color), #000000 20%);
+		--border-end-color: color-mix(in oklab, var(--link-color), #FFFFFF 30%);
+	}
 }
+
+button:is([aria-expanded], [aria-pressed]) {
+	display: flex;
+	flex-direction: row;
+	gap: 3px;
+	align-items: center;
+	justify-content: center;
+
+	&::before {
+		content: "";
+		display: inline-block;
+		width: 0.6em;
+		height: 0.6em;
+		transform: rotate(45deg);
+		border: 1px solid var(--border-color);
+	}
+
+	&:is([aria-expanded="true"], [aria-pressed="true"]) {
+		&::before {
+			background-color: var(--border-color);
+		}
+	}
+}
+
+button:is([aria-expanded="true"], [aria-pressed="true"]), details[open] summary {
+	--border-start-color: color-mix(in oklab, var(--link-color), #000000 20%);
+	--border-end-color: color-mix(in oklab, var(--link-color), #FFFFFF 30%);
+
+	background-color: var(--selected-color);
+
+	&:hover {
+		background-color: color-mix(in oklab, var(--selected-color), var(--button-face-color) 20%);
+	}
+}
+
 /** https://browserstrangeness.bitbucket.io/css_hacks.html#safari **/
 @supports (-webkit-hyphens:none) {
 	select {
@@ -196,18 +248,10 @@ button, input:is([type="button"], [type="submit"], [type="reset"]), input[type="
 	}
 }
 
-button[aria-expanded="true"], button[aria-pressed="true"], details[open] summary {
-	background-color: var(--selected-color);
-	box-shadow: 0px 0px 3px 1px var(--link-color) inset;
-}
-
 :is(button, select, input:is([type="button"], [type="submit"], [type="reset"]))[disabled], input[type="file"][disabled]::file-selector-button {
 	text-decoration: line-through;
 	border: 1px solid var(--border-color);
 	opacity: 0.5;
-}
-
-:is(button, select, input:is([type="button"], [type="submit"], [type="reset"]))[disabled]:hover, input[type="file"][disabled]::file-selector-button:hover {
 	cursor: not-allowed;
 }
 
@@ -236,7 +280,7 @@ mark {
 
 form {
 	button[type="submit"], button:not([type="reset"], [type="button"]), input[type="submit"] {
-		border-width: 2px;
+		border-width: 3px;
 		font-weight: bold;
 	}
 }
