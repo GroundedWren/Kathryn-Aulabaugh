@@ -96,15 +96,12 @@
 			white-space: pre-wrap;
 		}
 		
-		/* I'd use attr() with  <type-or-unit> if it had broader support */
 		figure {
 			margin: auto;
-			aspect-ratio: var(--width) / var(--height);
-			max-width: calc(var(--width) * 1px);
+		}
 
-			img {
-				width: 100%;
-			}
+		img {
+			margin-inline: auto;
 		}
 	</style>
 </head>
@@ -381,9 +378,10 @@
 					perform NER annotation and add the documents to the index. To keep the evaluation consistent
 					with others, no non-entity tokens are recorded into the index.
 				</p>
-				<figure
-					style="--width: 714; --height: 526;"
-				><gw-image-loader>
+				<figure><gw-image-loader
+					data-w="714"
+					data-h="526"
+				>
 					<img
 						src="./img/StanfordCRF.png"
 						loading="lazy"
@@ -401,9 +399,10 @@
 					have the required specs to run the web service locally, so it was evaluated with DBPedia’s
 					hosting. Results are below.
 				</p>
-				<figure
-					style="--width: 657; --height: 481;"
-				><gw-image-loader>
+				<figure><gw-image-loader
+					data-w="657"
+					data-h="481"
+				>
 					<img 
 						src="./img/DBPediaSpotlight.png"
 						loading="lazy"
@@ -426,9 +425,10 @@
 					Stanford's TokensRegex enables exact string matching through regular expressions. With ~1.1
 					million Named Entities from DBPedia, this was evaluated below.
 				</p>
-				<figure
-					style="--width: 691; --height: 485;"
-				><gw-image-loader>
+				<figure><gw-image-loader
+					data-w="691"
+					data-h="485"
+				>
 					<img 
 						src="./img/StanfordTokensRegex.png" 
 						loading="lazy"
@@ -448,9 +448,10 @@
 					Results of measuring the number of tagged entities in 10000 documents while varying the
 					gazetteer size are shown below.
 				</p>
-				<figure
-					style="--width: 737; --height: 515;"
-				><gw-image-loader>
+				<figure><gw-image-loader
+					data-w="737"
+					data-h="515"
+				>
 					<img 
 						src="./img/GazetteerTreeEntitiesTagged.png" 
 						loading="lazy"
@@ -462,9 +463,10 @@
 					there is a significant runtime cost of using POS tagging, as shown below (Entity Instances refers
 					to the number of Named Entities in the gazetteer).
 				</p>
-				<figure
-					style="--width: 681; --height: 503;"
-				><gw-image-loader>
+				<figure><gw-image-loader
+					data-w="681"
+					data-h="503"
+				>
 					<img
 						src="./img/GazetteerTreeExtractor.png"
 						loading="lazy"
@@ -489,9 +491,10 @@
 					provided labeled training file, three new CRF classifiers were produced and evaluated. They
 					had ~6k, ~250k, and ~550k gazetteer entries each. Results are below.
 				</p>
-				<figure
-					style="--width: 666; --height: 517;"
-				><gw-image-loader>
+				<figure><gw-image-loader
+					data-w="666"
+					data-h="517"
+				>
 					<img
 						src="./img/StanfordCRFGaz1.png"
 						loading="lazy"
@@ -504,9 +507,10 @@
 					313 days. It is worth noting that all of these classifiers tag very few entities. This may be due to
 					the small training data, or due to not many names appearing in the dataset.
 				</p>
-				<figure
-					style="--width: 684; --height: 527;"
-				><gw-image-loader>
+				<figure><gw-image-loader
+					data-w="684"
+					data-h="527"
+				>
 					<img 
 						src="./img/StanfordCRFGaz2.png" 
 						loading="lazy"
@@ -524,9 +528,10 @@
 					Supporting Efficient, Scalable Entity Search with Dual-Inversion Index (2010)</cite>. Space usage for
 					these indexes is shown below.
 				</p>
-				<figure
-					style="--width: 770; --height: 436;"
-				><gw-image-loader>
+				<figure><gw-image-loader
+					data-w="770"
+					data-h="436"
+				>
 					<img 
 						src="./img/SpaceUsageOfIndexes.png"
 						loading="lazy"

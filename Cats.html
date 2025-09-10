@@ -212,13 +212,6 @@
 				
 				figure {
 					margin: 0;
-					aspect-ratio: var(--width) / var(--height);
-					max-width: calc(var(--width) * 1px);
-
-					img {
-						width: 100%;
-						height: 100%;
-					}
 				}
 			}
 			
@@ -263,9 +256,10 @@
 		<article aria-labelledby="hAvi">
 			<h2 id="hAvi">Avitus <q>Avi</q> Rix Aulabaugh</h2>
 			<aside class="cat-photo">
-				<figure
-					style="--width: 629; --height: 629;"
-				><gw-image-loader>
+				<figure><gw-image-loader
+					data-w="629"
+					data-h="629"
+				>
 					<img
 						loading="lazy"
 						src="./img/cats/Avi_Profile.jpg"
@@ -280,9 +274,10 @@
 		<article aria-labelledby="hShadow" class="right">
 			<h2 id="hShadow">Shadow Julian Bruner</h2>
 			<aside class="cat-photo">
-				<figure
-					style="--width: 625; --height: 625;"
-				><gw-image-loader>
+				<figure><gw-image-loader
+					data-w="625"
+					data-h="625"
+				>
 					<img
 						loading="lazy"
 						src="./img/cats/Shadow_Profile.jpg"
@@ -297,9 +292,10 @@
 		<article aria-labelledby="hEcho">
 			<h2 id="hEcho">Echo Jadzia Bruner</h2>
 			<aside class="cat-photo">
-				<figure
-					style="--width: 635; --height: 635;"
-				><gw-image-loader>
+				<figure><gw-image-loader
+					data-w="635"
+					data-h="635"
+				>
 					<img
 						loading="lazy"
 						src="./img/cats/Echo_Profile.jpg"
