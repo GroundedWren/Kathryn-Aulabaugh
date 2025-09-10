@@ -60,19 +60,8 @@
 		}) (window.GW.Controls.Veil = window.GW.Controls.Veil || {});
 	</script>
 	
-	<script>
-		(function GW(ns) {
-		
-		}) (window.GW = window.GW || {});
-		
-		window.addEventListener("load", function onLoad() {});
-		
-		window.addEventListener("beforeunload", function onBeforeUnload(event)
-		{
-		});
-	</script>
-	
 	<script src="./scripts/Main.js"></script>
+	<script src="./scripts/ImageLoaderControl.js"></script>
 	
 	<link rel="stylesheet" href="./styles/variables.css" type="text/css">
 	<link rel="stylesheet" href="./styles/main.css" type="text/css">
@@ -139,6 +128,7 @@
 			img {
 				border-radius: 50px;
 				height: 282px;
+				aspect-ratio: 688 / 647;
 			}
 		}
 		
@@ -211,7 +201,13 @@
 	</nav>
 	<main id="mainContent">
 		<figure id="figKate">
-			<img loading="lazy" src="./img/Kate.png" alt="A white woman with long brown hair wearing glasses and a purple sweater smiling at the camera.">
+			<gw-image-loader data-color="#402b39">
+				<img
+					loading="lazy"
+					src="./img/Kate.png"
+					alt="A white woman with long brown hair wearing glasses and a purple sweater smiling at the camera."
+				>
+			</gw-image-loader>
 			<figcaption>Hey, that's me!</figcaption>
 		</figure>
 		<article aria-labelledby="hAbout">
@@ -227,7 +223,7 @@
 	<footer>
 		<article>
 			Created <time datetime="2024-02-04T21:29:35.486Z">Feb 4, 2024</time> (with Notepad++)<br />
-			Last updated <time datetime="2025-06-23T01:05:10.357Z">Jun 22, 2025</time><br />
+			Last updated <time datetime="2025-09-10T05:22:44.512Z">September 10, 2025</time><br />
 			<a href="https://github.com/GroundedWren/Kathryn-Aulabaugh">Repository</a>
 		</article>
 		<aside>

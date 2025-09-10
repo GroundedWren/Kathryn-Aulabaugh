@@ -67,6 +67,7 @@
 	<script src="./scripts/Main.js"></script>
 	<script src="./scripts/ArticleControl.js"></script>
 	<script src="./scripts/ToasterControl.js"></script>
+	<script src="./scripts/ImageLoaderControl.js"></script>
 	
 	<script>
 		(function GW(ns) {
@@ -95,13 +96,15 @@
 			white-space: pre-wrap;
 		}
 		
+		/* I'd use attr() with  <type-or-unit> if it had broader support */
 		figure {
-			width: fit-content;
 			margin: auto;
-		}
-		
-		img {
-			width: 100%;
+			aspect-ratio: var(--width) / var(--height);
+			max-width: calc(var(--width) * 1px);
+
+			img {
+				width: 100%;
+			}
 		}
 	</style>
 </head>
@@ -378,9 +381,15 @@
 					perform NER annotation and add the documents to the index. To keep the evaluation consistent
 					with others, no non-entity tokens are recorded into the index.
 				</p>
-				<figure>
-					<img src="./img/StanfordCRF.png" alt="A chart plotting Runtime in seconds against numer of documents. For a 3 class classifier, the trendline is y = 0.0026x + 2.6539 with R squared 0.9981. For a 7 class classifier, the trendline is 0.0028x + 2.5211 with R squared 0.9953.">
-				</figure>
+				<figure
+					style="--width: 714; --height: 526;"
+				><gw-image-loader>
+					<img
+						src="./img/StanfordCRF.png"
+						loading="lazy"
+						alt="A chart plotting Runtime in seconds against numer of documents. For a 3 class classifier, the trendline is y = 0.0026x + 2.6539 with R squared 0.9981. For a 7 class classifier, the trendline is 0.0028x + 2.5211 with R squared 0.9953."
+					>
+				</gw-image-loader></figure>
 				<p>
 					Extrapolating from the linear best-fit lines, using the three class classifier to index one
 					billion documents would take 31 days, and using the seven class classifier would take 32 days.
@@ -392,9 +401,15 @@
 					have the required specs to run the web service locally, so it was evaluated with DBPedia’s
 					hosting. Results are below.
 				</p>
-				<figure>
-					<img src="./img/DBPediaSpotlight.png" alt="A chart plotting Runtime in seconds against numer of documents. The trendline is y = 0.0578x + 0.932 with R squared 0.9984.">
-				</figure>
+				<figure
+					style="--width: 657; --height: 481;"
+				><gw-image-loader>
+					<img 
+						src="./img/DBPediaSpotlight.png"
+						loading="lazy"
+						alt="A chart plotting Runtime in seconds against numer of documents. The trendline is y = 0.0578x + 0.932 with R squared 0.9984."
+					>
+				</gw-image-loader></figure>
 				<p>
 					To index one billion documents, this process would take 669 days, which is too long for
 					our purposes.
@@ -411,9 +426,15 @@
 					Stanford's TokensRegex enables exact string matching through regular expressions. With ~1.1
 					million Named Entities from DBPedia, this was evaluated below.
 				</p>
-				<figure>
-					<img src="./img/StanfordTokensRegex.png" alt="A chart plotting Runtime in seconds against numer of documents. The trendline is y = 0.2264x - 2.269 with R squared 0.9833.">
-				</figure>
+				<figure
+					style="--width: 691; --height: 485;"
+				><gw-image-loader>
+					<img 
+						src="./img/StanfordTokensRegex.png" 
+						loading="lazy"
+						alt="A chart plotting Runtime in seconds against numer of documents. The trendline is y = 0.2264x - 2.269 with R squared 0.9833."
+					>
+				</gw-image-loader></figure>
 				<p>
 					To index one billion documents would take 7.1 years, so it does not seem TokensRegex
 					was designed for such a large number of patterns.
@@ -427,17 +448,29 @@
 					Results of measuring the number of tagged entities in 10000 documents while varying the
 					gazetteer size are shown below.
 				</p>
-				<figure>
-					<img src="./img/GazetteerTreeEntitiesTagged.png" alt="A chart plotting entities found against gazetteer size. The trendline for no POS is y = 1.5313x + 3125.8 with R squared 0.9855. The trendline for POS is y = 0.0291x - 17.078 with R squared 0.9975.">
-				</figure>
+				<figure
+					style="--width: 737; --height: 515;"
+				><gw-image-loader>
+					<img 
+						src="./img/GazetteerTreeEntitiesTagged.png" 
+						loading="lazy"
+						alt="A chart plotting entities found against gazetteer size. The trendline for no POS is y = 1.5313x + 3125.8 with R squared 0.9855. The trendline for POS is y = 0.0291x - 17.078 with R squared 0.9975."
+					>
+				</gw-image-loader></figure>
 				<p>
 					It seems that limiting the entities to noun phrases does improve precision. However,
 					there is a significant runtime cost of using POS tagging, as shown below (Entity Instances refers
 					to the number of Named Entities in the gazetteer).
 				</p>
-				<figure>
-					<img src="./img/GazetteerTreeExtractor.png" alt="A chart plotting runtime for one billion documents in days against entity instances. There are no trendlines. POS tagging begins over 300 days for 100000 documents and climbs, while No POS begins near zero but breaks 300 days by 700000.">
-				</figure>
+				<figure
+					style="--width: 681; --height: 503;"
+				><gw-image-loader>
+					<img
+						src="./img/GazetteerTreeExtractor.png"
+						loading="lazy"
+						alt="A chart plotting runtime for one billion documents in days against entity instances. There are no trendlines. POS tagging begins over 300 days for 100000 documents and climbs, while No POS begins near zero but breaks 300 days by 700000."
+					>
+				</gw-image-loader></figure>
 				<p>
 					Interestingly, runtime for using POS tagging remains relatively constant when increasing
 					the number of Entity Instances. A hypothesis for why this may be is because storing a large
@@ -456,18 +489,30 @@
 					provided labeled training file, three new CRF classifiers were produced and evaluated. They
 					had ~6k, ~250k, and ~550k gazetteer entries each. Results are below.
 				</p>
-				<figure>
-					<img src="./img/StanfordCRFGaz1.png" alt="A chart plotting runtime in seconds against number of documents. For 6075 instances, the trendline is y = 0.0012x + 0.8311 with R squared 0.9979. For 554834 instances, the trendline is y = 0.0111x - 0.9343 with R squared 0.9956. For 250000 instances, the trendline is 0.027x - 3.4958 with R squared 0.9971.">
-				</figure>
+				<figure
+					style="--width: 666; --height: 517;"
+				><gw-image-loader>
+					<img
+						src="./img/StanfordCRFGaz1.png"
+						loading="lazy"
+						alt="A chart plotting runtime in seconds against number of documents. For 6075 instances, the trendline is y = 0.0012x + 0.8311 with R squared 0.9979. For 554834 instances, the trendline is y = 0.0111x - 0.9343 with R squared 0.9956. For 250000 instances, the trendline is 0.027x - 3.4958 with R squared 0.9971."
+					>
+				</gw-image-loader></figure>
 				<p>
 					To index one billion documents with the 6k entries gazetteer would take 14 days, with
 					the 250k entries gazetteer would take 128 days, and with the 550k entries gazetteer would take
 					313 days. It is worth noting that all of these classifiers tag very few entities. This may be due to
 					the small training data, or due to not many names appearing in the dataset.
 				</p>
-				<figure>
-					<img src="./img/StanfordCRFGaz2.png" alt="A chart plotting entities tagged against number of documents. For 6075 instances, the trendline is 0.3245x - 68.572 with R squared 0.9969. For 554834 instances, the trendline is 0.3245x - 68.769 with R squared 0.9969. For 250000 instances, the trendline is 0.3594x - 77.076 with R Squared 0.9975.">
-				</figure>
+				<figure
+					style="--width: 684; --height: 527;"
+				><gw-image-loader>
+					<img 
+						src="./img/StanfordCRFGaz2.png" 
+						loading="lazy"
+						alt="A chart plotting entities tagged against number of documents. For 6075 instances, the trendline is 0.3245x - 68.572 with R squared 0.9969. For 554834 instances, the trendline is 0.3245x - 68.769 with R squared 0.9969. For 250000 instances, the trendline is 0.3594x - 77.076 with R Squared 0.9975."
+					>
+				</gw-image-loader></figure>
 				<p>They also all tag roughly the same number of entities.</p>
 				<p>
 					One of the first questions tested was the space usage of the index. In our demo we
@@ -479,9 +524,15 @@
 					Supporting Efficient, Scalable Entity Search with Dual-Inversion Index (2010)</cite>. Space usage for
 					these indexes is shown below.
 				</p>
-				<figure>
-					<img src="./img/SpaceUsageOfIndexes.png" alt="A chart plotting space in bytes against number of documents. For E-Inverted, the trendline is y = 71723x - 2.702E+6 with R squared 0.9988. For D-Inverted, the trendline is y = 2650.4x - 4170.6 with R squared 0.9994.">
-				</figure>
+				<figure
+					style="--width: 770; --height: 436;"
+				><gw-image-loader>
+					<img 
+						src="./img/SpaceUsageOfIndexes.png"
+						loading="lazy"
+						alt="A chart plotting space in bytes against number of documents. For E-Inverted, the trendline is y = 71723x - 2.702E+6 with R squared 0.9988. For D-Inverted, the trendline is y = 2650.4x - 4170.6 with R squared 0.9994."
+					>
+				</gw-image-loader></figure>
 				<p>
 					The exact figures for this chart should be considered with skepticism since the space
 					usage is not fully optimized, and this evaluation was done before the demo system was

@@ -62,6 +62,7 @@
 	
 	<script src="./scripts/Main.js"></script>
 	<script src="./scripts/GalleryControl.js"></script>
+	<script src="./scripts/ImageLoaderControl.js"></script>
 	
 	<link rel="stylesheet" href="./styles/variables.css" type="text/css">
 	<link rel="stylesheet" href="./styles/main.css" type="text/css">
@@ -211,10 +212,13 @@
 				
 				figure {
 					margin: 0;
-				}
-				
-				img {
-					width: 100%;
+					aspect-ratio: var(--width) / var(--height);
+					max-width: calc(var(--width) * 1px);
+
+					img {
+						width: 100%;
+						height: 100%;
+					}
 				}
 			}
 			
@@ -259,10 +263,16 @@
 		<article aria-labelledby="hAvi">
 			<h2 id="hAvi">Avitus <q>Avi</q> Rix Aulabaugh</h2>
 			<aside class="cat-photo">
-				<figure>
-					<img loading="lazy" src="./img/cats/Avi_Profile.jpg" alt="Avi perches atop the back of a chair.">
+				<figure
+					style="--width: 629; --height: 629;"
+				><gw-image-loader>
+					<img
+						loading="lazy"
+						src="./img/cats/Avi_Profile.jpg"
+						alt="Avi perches atop the back of a chair."
+					>
 					<figcaption>Avi</figcaption>
-				</figure>
+				</gw-image-loader></figure>
 			</aside>
 			<p>Born in 2016 and rescued by Kathryn in 2018, Avi is a completely black male cat with green eyes and a sweet but independent personality. He can usually be found curled up on Kathryn's lap, is very tolerant to being held, and loves getting into trouble with his little brother.</p>
 			<p>He is also the uncontested staring contest / ominous looming champion who is not afraid to say hello to new people.</p>
@@ -270,10 +280,16 @@
 		<article aria-labelledby="hShadow" class="right">
 			<h2 id="hShadow">Shadow Julian Bruner</h2>
 			<aside class="cat-photo">
-				<figure>
-					<img loading="lazy" src="./img/cats/Shadow_Profile.jpg" alt="Shadow lounges with with a lot of swagger on a couch.">
+				<figure
+					style="--width: 625; --height: 625;"
+				><gw-image-loader>
+					<img
+						loading="lazy"
+						src="./img/cats/Shadow_Profile.jpg"
+						alt="Shadow lounges with with a lot of swagger on a couch."
+					>
 					<figcaption>Shadow</figcaption>
-				</figure>
+				</gw-image-loader></figure>
 			</aside>
 			<p>Shadow, born in 2022 and rescued in 2023 by David with his half-sister Echo, is a warm-hearted black male cat with white patches on his chest and toes. Truly affection incarnate, Shadow craves human attention and is the cuddliest, floppiest little guy this side of the Mississippi.</p>
 			<p>Known for his cute little squeaks, Shadow has boundless energy to chase his own tail and siblings all over the place.</p>
@@ -281,10 +297,16 @@
 		<article aria-labelledby="hEcho">
 			<h2 id="hEcho">Echo Jadzia Bruner</h2>
 			<aside class="cat-photo">
-				<figure>
-					<img loading="lazy" src="./img/cats/Echo_Profile.jpg" alt="Echo sits on a couch while a human hand scratches her neck.">
+				<figure
+					style="--width: 635; --height: 635;"
+				><gw-image-loader>
+					<img
+						loading="lazy"
+						src="./img/cats/Echo_Profile.jpg"
+						alt="Echo sits on a couch while a human hand scratches her neck."
+					>
 					<figcaption>Echo</figcaption>
-				</figure>
+				</figure>gw-image-loader></figure>
 			</aside>
 			<p>Echo is a well-spoken, emotive, and highly persuasive all-black female cat and half-sister to Shadow. A true wordsmith, Echo advocates tirelessly for the rights of her kin and herself.</p>
 			<p>Don't let her sweet nature fool you, she's extremely cunning and will find innovative ways out of (and into) situations. She's a fierce fighter in play-combat who can sound ten times her size and loves getting into trouble just as much as her brothers.</p>
