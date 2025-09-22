@@ -11,6 +11,7 @@ html, body {
 	
 	background-color: color-mix(in oklab, var(--background-color), transparent 40%);
 	color: var(--text-color);
+	fill: var(--text-color);
 }
 html {
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
