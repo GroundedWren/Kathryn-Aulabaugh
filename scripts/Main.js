@@ -158,10 +158,6 @@ window.KJA = window.KJA || {};
 								justify-self: auto;
 							}
 						}
-						
-						#${this.getId("psnlz")} {
-							display: contents;
-						}
 					}
 				</style>
 				`);
@@ -207,7 +203,183 @@ window.KJA = window.KJA || {};
 			}
 		};
 		customElements.define("kja-header", ns.HeaderEl);
+
+		// kja-background requires gw-image-loader also be loaded
+		ns.BackgroundImageEl = class BackgroundImageEl extends HTMLElement {
+			static InstanceCount = 0; // Global count of instances created
+			static InstanceMap = {}; // Dynamic map of IDs to instances of the element currently attached
+
+			// Element name
+			static Name = "kja-background";
+
+			// Attributes whose changes we respond to
+			static observedAttributes = ["src-light", "src-dark"]; //colors are fixed
+
+			// Element CSSStyleSheet
+			static #CommonStyleSheet = new CSSStyleSheet();
+			static #CommonStyleAttribute = `data-${BackgroundImageEl.Name}-style`;
+			static {
+				BackgroundImageEl.#CommonStyleSheet.replaceSync(`${BackgroundImageEl.Name} {
+					display: contents;
+				}
+				html {
+					img.page-background {
+						position: fixed;
+						min-width: 100vw;
+						min-height: 100vh;
+
+						z-index: -1;
+						left: 0;
+						top: 0;
+					}
+					&.theme-light {
+						img.page-background.dark {
+							display: none;
+						};
+					}
+					&.theme-dark {
+						img.page-background.light {
+							display: none;
+						};
+					}
+					@media print {
+					img.page-background {
+						display: none;
+					}
+				}
+				`);
+			}
+
+			InstanceId; // Identifier for this instance of the element
+			IsInitialized; // Whether the element has rendered its content
+
+			#StyleSheet; // CSSStyleSheet for this instance
+			#StyleAttribute; // Identifying attribute for this instance's CSSStyleSheet
+
+			/** Creates an instance */
+			constructor() {
+				super();
+				if(!this.getId) {
+					// We're not initialized correctly. Attempting to fix:
+					Object.setPrototypeOf(this, customElements.get(BackgroundImageEl.Name).prototype);
+				}
+				this.InstanceId = BackgroundImageEl.InstanceCount++;
+
+				this.#StyleSheet = new CSSStyleSheet();
+				this.#StyleAttribute = `data-${this.getId("style")}`;
+			}
+
+			/** Shortcut for the root node of the element */
+			get Root() {
+				return this.getRootNode();
+			}
+			/** Looks up the <head> element (or a fascimile thereof in the shadow DOM) for the element's root */
+			get Head() {
+				if(this.Root.head) {
+					return this.Root.head;
+				}
+				if(this.Root.getElementById("gw-head")) {
+					return this.Root.getElementById("gw-head");
+				}
+				const head = document.createElement("div");
+				head.setAttribute("id", "gw-head");
+				this.Root.prepend(head);
+				return head;
+			}
+
+			/**
+			 * Generates a globally unique ID for a key unique to the custom element instance
+			 * @param {String} key Unique key within the custom element
+			 * @returns A globally unique ID
+			 */
+			getId(key) {
+				return `${BackgroundImageEl.Name}-${this.InstanceId}-${key}`;
+			}
+			/**
+			 * Finds an element within the custom element created with an ID from getId
+			 * @param {String} key Unique key within the custom element
+			 * @returns The element associated with the key
+			 */
+			getRef(key) {
+				return this.querySelector(`#${CSS.escape(this.getId(key))}`);
+			}
+
+			/** Handler invoked when the element is attached to the page */
+			connectedCallback() {
+				this.onAttached();
+			}
+			/** Handler invoked when the element is moved to a new document via adoptNode() */
+			adoptedCallback() {
+				this.onAttached();
+			}
+			/** Handler invoked when the element is disconnected from the document */
+			disconnectedCallback() {
+				delete BackgroundImageEl.InstanceMap[this.InstanceId];
+			}
+			/** Handler invoked when any of the observed attributes are changed */
+			attributeChangedCallback(name, oldValue, newValue) {
+				if(!this.IsInitialized) {
+					return;
+				}
+				this.#updateAttributes();
+			}
+
+			/** Performs setup when the element has been sited */
+			onAttached() {
+				if(!this.Head.hasAttribute(BackgroundImageEl.#CommonStyleAttribute)) {
+					this.Head.setAttribute(BackgroundImageEl.#CommonStyleAttribute, "");
+					this.Root.adoptedStyleSheets.push(BackgroundImageEl.#CommonStyleSheet);
+				}
+				if(!this.Head.hasAttribute(this.#StyleAttribute)) {
+					this.Head.setAttribute(this.#StyleAttribute, "");
+					this.Root.adoptedStyleSheets?.push(this.#StyleSheet);
+				}
+				this.setAttribute("data-instance", this.InstanceId);
+
+				BackgroundImageEl.InstanceMap[this.InstanceId] = this;
+				if(document.readyState === "loading") {
+					document.addEventListener("DOMContentLoaded", () => {
+						this.#initialize();
+					});
+				}
+				else {
+					this.#initialize();
+				}
+			}
+
+			/** First-time setup */
+			#initialize() {
+				if(this.IsInitialized) { return; }
+
+				this.innerHTML = `
+					<gw-image-loader
+						id="${this.getId("loader-light")}"
+						data-color="${this.getAttribute("color-light")}"
+					>
+						<img id="${this.getId("image-light")}" alt="" class="page-background light">
+					</gw-image-loader>
+					<gw-image-loader
+						id="${this.getId("loader-dark")}"
+						data-color="${this.getAttribute("color-dark")}"
+					>
+						<img id="${this.getId("image-dark")}" alt="" class="page-background dark">
+					</gw-image-loader>
+				`;
+				this.#updateAttributes();
+
+				this.IsInitialized = true;
+			}
+
+			#updateAttributes() {
+				this.getRef("image-light").setAttribute("src", this.getAttribute("src-light"));
+				this.getRef("image-dark").setAttribute("src", this.getAttribute("src-dark"));
+			}
+		}
+		if(!customElements.get(ns.BackgroundImageEl.Name)) {
+			customElements.define(ns.BackgroundImageEl.Name, ns.BackgroundImageEl);
+		}
 	}) (ns.Controls = ns.Controls || {});
+
 }) (window.KJA.Common = window.KJA.Common || {}); 
 
 window.GW = window.GW || {};
