@@ -17,16 +17,6 @@ html {
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-size: 1em;
 
-	background-size: cover;
-	background-attachment: fixed;
-	@media not print {
-		&.theme-dark {
-			background-image: url(../img/Cosmic_Cliffs.png);
-		}
-		&.theme-light {
-			background-image: url(../img/Lilacs.png);
-		}
-	}
 	@media print {
 		::-webkit-scrollbar {
 			display: none;
