@@ -15,7 +15,7 @@ html, body {
 	
 	word-break: break-word;
 	
-	background-color: var(--background-color);
+	background-color: color-mix(in oklab, var(--background-color), transparent 40%);
 	color: var(--text-color);
 	fill: var(--text-color);
 }
