@@ -208,8 +208,6 @@ window.KJA = window.KJA || {};
 					</div>
 					<gw-background-image
 						id="${this.getId("bkgImg")}"
-						light="theme-light"
-						dark="theme-dark"
 
 						SRC_1="https://kathryn-aulabaugh.com/img/Cosmic_Cliffs.png"
 						COLOR_1="#8a6161"
