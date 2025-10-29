@@ -27,9 +27,12 @@ window.KJA = window.KJA || {};
 							header {
 								display: grid;
 								grid-template-columns: 1fr 1fr 1fr;
+								grid-template-areas:
+									"left head right";
 								align-items: center;
 								text-align: center;
 								gap: 10px;
+								padding-block-start: 5px;
 								padding-block-end: 10px;
 								border-block-end: 1px solid color-mix(in oklab, var(--border-color), transparent 80%);
 								margin-inline: 4px;
@@ -39,18 +42,27 @@ window.KJA = window.KJA || {};
 									top: 4px;
 									left: 4px;
 								}
-								
-								h1 {
-									margin-block: 0px;
+
+								hgroup {
+									grid-area: head;
+
+									h1 {
+										margin-block: 0px;
+									}
 								}
 								
 								.left, .right {
 									width: fit-content;
 								}
 								.left {
+									grid-area: left;
 									justify-self: flex-start;
+									display: grid;
+									justify-items: start;
+									text-align: left;
 								}
 								.right {
+									grid-area: right;
 									justify-self: flex-end;
 								}
 							}
@@ -160,10 +172,18 @@ window.KJA = window.KJA || {};
 					@media (max-width: ${this.getAttribute("reflowWidth") || "450px"}) {
 						#${this.getId("header")} {
 							grid-template-columns: 1fr;
-							justify-items: center;
+							grid-template-areas: 
+								"left right"
+								"head head";
+							align-items: start;
 							
-							.left, .right {
-								justify-self: auto;
+							> .left {
+								justify-self: start;
+							}
+
+							> .right {
+								justify-self: end;
+								justify-content: center;
 							}
 						}
 					}
@@ -187,13 +207,13 @@ window.KJA = window.KJA || {};
 							: ""
 						}
 					</div>
-					<div>
+					<hgroup>
 						<h1>${this.getAttribute("h1Text")}</h1>
 						${this.hasAttribute("pHTML")
 							? `<p>${this.getAttribute("pHTML")}</p>`
 							: ""
 						}
-					</div>
+					</hgroup>
 					<div class="right">
 						<details>
 							<summary>
