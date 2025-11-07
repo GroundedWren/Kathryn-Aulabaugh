@@ -1,11 +1,13 @@
 :root, .theme-light {
 	--background-color: #FFFFFF;
-	--background-color-2: #E3E3E3;
+	--background-alt-color: #E3E3E3;
 	--text-color: #000000;
 	--border-color: #000000;
 	--selected-color: #90CBDB;
+	--selected-alt-color: #A159E8;
 	--button-face-color: #C8C8C8;
 	--button-text-color: #000000;
+	--misc-interactive-color: #C06268;
 	--input-text-color: #000000;
 	--input-background-color: #FFFFFF;
 	--link-color: #0000EE;
@@ -25,12 +27,14 @@
 @media not print {
 	.theme-dark {
 		--background-color: #000000;
-		--background-color-2: #242424;
+		--background-alt-color: #242424;
 		--text-color: #FFFFFF;
 		--border-color: #FFFFFF;
 		--selected-color: #223891;
+		--selected-alt-color: #8C53C6;
 		--button-face-color: #474747;
 		--button-text-color: #FFFFFF;
+		--misc-interactive-color: #B54B52;
 		--input-text-color: #FFFFFF;
 		--input-background-color: #000000;
 		--link-color: #74D7EE;
