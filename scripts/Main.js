@@ -39,8 +39,8 @@ window.KJA = window.KJA || {};
 
 								a[href="#mainContent"]:focus-within {
 									position: absolute !important;
-									top: 4px;
-									left: 4px;
+									inset-block-start: 4px;
+									inset-inline-start: 4px;
 								}
 
 								hgroup {
@@ -59,7 +59,7 @@ window.KJA = window.KJA || {};
 									justify-self: flex-start;
 									display: grid;
 									justify-items: start;
-									text-align: left;
+									text-align: start;
 								}
 								.right {
 									grid-area: right;
@@ -117,7 +117,7 @@ window.KJA = window.KJA || {};
 							gw-personalization {
 								position: absolute;
 								z-index: 2;
-								right: 0px;
+								inset-inline-end: 0px;
 								border: 2px solid var(--border-color);
 								margin-inline: 6px;
 								padding: 5px;
