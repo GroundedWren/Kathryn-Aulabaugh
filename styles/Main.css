@@ -118,7 +118,8 @@ tbody th {
 body > footer {
 	border-block-start: 1px solid color-mix(in oklab, var(--border-color), transparent 80%);
 	font-size: 0.9em;
-	background-color: color-mix(in oklab, var(--background-alt-color), transparent 30%);
+	background-color: color-mix(in oklab, var(--background-alt-color), transparent 60%);
+	backdrop-filter: blur(5px);
 	padding: 2px
 }
 
