@@ -37,6 +37,21 @@ window.KJA = window.KJA || {};
 								border-block-end: 1px solid color-mix(in oklab, var(--border-color), transparent 80%);
 								margin-inline: 4px;
 
+								position: relative;
+								> * {
+									z-index: 2;
+								}
+
+								&::before {
+									content: "";
+									position: absolute;
+									z-index: 1;
+									width: 100%;
+									height: 100%;
+									background-color: color-mix(in oklab, var(--background-alt-color), transparent 60%);
+									backdrop-filter: blur(5px);
+								}
+
 								a[href="#mainContent"]:focus-within {
 									position: absolute !important;
 									inset-block-start: 4px;
