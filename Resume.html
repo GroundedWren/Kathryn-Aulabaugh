@@ -422,7 +422,10 @@
 			</div>
 			<input type="submit" value="Apply">
 		</form>
-		<button onclick="window.print();"><gw-icon iconKey="print"></gw-icon></button>
+		<div role="group">
+			<button onclick="window.print();" aria-describedby="spnMargins"><gw-icon iconKey="print"></gw-icon></button>
+			<span id="spnMargins">Ensure margins are set to "none"</span>
+		</div>
 		<label><gw-switch><input type="checkbox" id="cbxHighlights" checked></gw-switch> Show highlights</label>
 		<p>Last updated: <time datetime="2026-11-15T19:15:20.425Z">Nov 15, 2026</time></p>
 	</footer>
