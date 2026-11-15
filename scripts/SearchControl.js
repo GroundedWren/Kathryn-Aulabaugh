@@ -48,9 +48,18 @@ window.GW.Controls = window.GW.Controls || {};
 								fill: var(--icon-color);
 							}
 						}
+
+						input {
+							field-sizing: content;
+							min-width: 65px;
+							max-width: 200px;
+						}
 						
 						[popover="auto"] {
 							text-align: center;
+							overflow: auto;
+							max-height: 100%;
+							max-width: 100%;
 							ol {
 								text-align: start;
 								padding-inline: 40px;
@@ -79,7 +88,7 @@ window.GW.Controls = window.GW.Controls || {};
 		}
 
 		get SearchData() {
-			return ns.Data[this.getAttribute("dataKey")];
+			return ns.Data[this.getAttribute("dataKey")] || {};
 		}
 
 		connectedCallback() {
@@ -133,7 +142,12 @@ window.GW.Controls = window.GW.Controls || {};
 				? `<ol aria-labelledby="${this.getId("strMatch")}">
 						${matches.map(match => {
 							let pageObj = this.SearchData[match.Key];
-							return `<li><em>${pageObj.Category}</em> / <strong><a href="${pageObj.URL}" tabindex="0">${match.Key}</a></strong></li>`
+							return `
+							<li>
+								<em>${pageObj.Category}</em> / <strong>
+									<a href="${pageObj.URL}" tabindex="0">${pageObj.DisplayName || match.Key}</a>
+								</strong>
+							</li>`
 						}).join("")}
 					</ol>`
 				: `<br><em>No matches</em>`
